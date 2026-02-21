@@ -24,7 +24,7 @@ namespace StupidTemplate.Mods
             {
                 GameObject obj = new GameObject("StupidNameTag");
                 obj.transform.SetParent(rig.headMesh.transform, false);
-                obj.transform.localPosition = new Vector3(0, 0.45f, 0); // Трохи над головою
+                obj.transform.localPosition = new Vector3(0, 0.5f, 0); // Трохи над головою
 
                 TextMesh tm = obj.AddComponent<TextMesh>();
                 tm.fontSize = 45;
