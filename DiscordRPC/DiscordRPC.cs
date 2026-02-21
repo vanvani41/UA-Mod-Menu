@@ -1,49 +1,86 @@
-﻿using DiscordRPC;
-using Photon.Pun;
+﻿using Photon.Pun;
 using UnityEngine;
 
 namespace StupidTemplate
 {
-    public class DiscordRPCManager
+    public class DiscordRPCManager : MonoBehaviour
     {
-        public static DiscordRpcClient client;
+        public static object client;
 
-        public static void Init()
+        public static void HandleRPC(bool enable)
         {
             try
             {
-                // Створюємо клієнта через повний шлях
-                client = new DiscordRpcClient("1474834964422987938");
-                client.Initialize();
-                UpdatePresence();
-                Debug.Log("UA Mod Menu: Discord RPC Initialized!");
+                if (enable) Init();
+                else Terminate();
             }
-            catch (System.Exception e)
+            catch { }
+        }
+
+        public static void Init()
+        {
+            if (client != null) return;
+            try
             {
-                Debug.LogError("RPC Error: " + e.Message);
+                var rpc = new DiscordRPC.DiscordRpcClient("1474834964422987938", autoEvents: true);
+
+                // Використовуємо подію OnReady, щоб відправити статус ТІЛЬКИ коли Discord дозволить
+                rpc.OnReady += (sender, e) => {
+                    UpdatePresence();
+                };
+
+                rpc.Initialize();
+                client = rpc;
+            }
+            catch { }
+        }
+
+
+        public static void Terminate()
+        {
+            if (client is DiscordRPC.DiscordRpcClient rpc)
+            {
+                try
+                {
+                    rpc.ClearPresence();
+                    rpc.Dispose();
+                    client = null;
+                }
+                catch { }
             }
         }
 
         public static void UpdatePresence()
         {
-            if (client == null) return;
-
-            string roomCode = PhotonNetwork.InRoom ? PhotonNetwork.CurrentRoom.Name : "Not in Room";
-
-            // Явно вказуємо типи через префікс DiscordRPC (Оцінка: !!)
-            DiscordRPC.RichPresence presence = new DiscordRPC.RichPresence();
-            presence.Details = "UA Mod Menu (Gorilla Tag)";
-            presence.State = $"Version: {PluginInfo.Version} | Room: {roomCode}";
-
-            presence.Assets = new DiscordRPC.Assets()
+            if (client is DiscordRPC.DiscordRpcClient rpc)
             {
-                LargeImageKey = "rpcimg",
-                LargeImageText = "UA Mod Menu"
-            };
+                try
+                {
+                    string roomCode = PhotonNetwork.InRoom ? PhotonNetwork.CurrentRoom.Name : "Not in Room";
 
-            presence.Timestamps = DiscordRPC.Timestamps.Now;
+                    var presence = new DiscordRPC.RichPresence()
+                    {
+                        Details = "UA Mod Menu (Gorilla Tag)",
+                        State = "Version: " + PluginInfo.Version + " | Room: " + roomCode,
+                        Assets = new DiscordRPC.Assets()
+                        {
+                            LargeImageKey = "rpcimg",
+                            LargeImageText = "UA Mod Menu"
+                        },
+                        Timestamps = DiscordRPC.Timestamps.Now
+                    };
+                    rpc.SetPresence(presence);
+                }
+                catch { }
+            }
+        }
 
-            client.SetPresence(presence);
+        public static void RunCallbacks()
+        {
+            if (client is DiscordRPC.DiscordRpcClient rpc)
+            {
+                try { rpc.Invoke(); } catch { }
+            }
         }
     }
 }

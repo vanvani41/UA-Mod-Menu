@@ -16,8 +16,10 @@ namespace StupidTemplate.Classes
         public static GradientColorKey[] GetSimpleGradient(Color a, Color b) =>
             new GradientColorKey[] { 
                 new GradientColorKey(a, 0f), 
-                new GradientColorKey(b, 0.5f), 
-                new GradientColorKey(a, 1f) 
+                new GradientColorKey(b, 0.25f), 
+                new GradientColorKey(a, 0.5f),
+                new GradientColorKey(b, 0.75f),
+                new GradientColorKey(a, 1f)
             };
 
         public GradientColorKey[] colors = GetSolidGradient(Color.magenta);

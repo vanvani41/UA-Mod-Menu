@@ -34,7 +34,7 @@ namespace StupidTemplate
         public static ExtGradient[] buttonColors = new ExtGradient[]
         {
             new ExtGradient { colors = ExtGradient.GetSolidGradient(Color.black) }, // Disabled
-            new ExtGradient { colors = ExtGradient.GetSimpleGradient(Color.gold, Color.blue) } // Enabled
+            new ExtGradient { colors = ExtGradient.GetSimple3Gradient(Color.black, Color.darkRed, Color.red) } // Enabled
         };
         public static Color[] textColors = new Color[]
         {
@@ -55,19 +55,20 @@ namespace StupidTemplate
         public static int buttonsPerPage = 8;
 
         public static float gradientSpeed = 0.25f; // Speed of colors
-        private static bool rpc = true;
 
-        public static void OnMenuOpened() // Або в іншому місці, де відкривається меню
+        public static bool rpc = true;
+        private static bool lastRpcState = false;
+
+        public static void OnMenuOpened()
         {
-            if (!rpc)
+            // Безпечний виклик через HandleRPC
+            if (rpc != lastRpcState)
             {
-                try
-                {
-                    DiscordRPCManager.Init();
-                    rpc = true;
-                }
-                catch { /* Якщо нема DLL, меню НЕ зламається */ }
+                DiscordRPCManager.HandleRPC(rpc);
+                lastRpcState = rpc;
             }
+
+            if (rpc) DiscordRPCManager.RunCallbacks();
         }
     }
 }

@@ -31,6 +31,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Notifications", enableMethod =() => disableNotifications = false, disableMethod =() => disableNotifications = true, enabled = !disableNotifications, toolTip = "Toggles the notifications."},
                 new ButtonInfo { buttonText = "FPS Counter", enableMethod =() => fpsCounter = true, disableMethod =() => fpsCounter = false, enabled = fpsCounter, toolTip = "Toggles the FPS counter."},
                 new ButtonInfo { buttonText = "Disconnect Button", enableMethod =() => disconnectButton = true, disableMethod =() => disconnectButton = false, enabled = disconnectButton, toolTip = "Toggles the disconnect button."},
+                new ButtonInfo { buttonText = "Discord Rich Presence", enableMethod =() => rpc = true, disableMethod =() => rpc = false, enabled = rpc, toolTip = "Toggles the Discord Rich Presence."},
             },
 
             new ButtonInfo[] { // Movement Settings [3]
