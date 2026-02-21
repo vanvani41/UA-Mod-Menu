@@ -56,7 +56,7 @@ namespace StupidTemplate
 
         public static float gradientSpeed = 0.25f; // Speed of colors
 
-        public static bool rpc = true;
+       /* public static bool rpc = true;
         private static bool lastRpcState = false;
 
         public static void OnMenuOpened()
@@ -69,6 +69,7 @@ namespace StupidTemplate
             }
 
             if (rpc) DiscordRPCManager.RunCallbacks();
+       */
         }
     }
 }

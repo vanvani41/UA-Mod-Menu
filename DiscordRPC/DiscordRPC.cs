@@ -1,4 +1,4 @@
-﻿using Photon.Pun;
+﻿/*using Photon.Pun;
 using UnityEngine;
 
 namespace StupidTemplate
@@ -84,3 +84,4 @@ namespace StupidTemplate
         }
     }
 }
+*/
