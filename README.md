@@ -1,7 +1,5 @@
 <details>
   <summary><b>English</b></summary>
-UA Mod Menu
-
 UA Mod Menu is a **first ukrainian** mod menu for Gorilla Tag, made by me, [**vanvani41**](https://github.com/vanvani41). Right now you can't use ukrainian language, but in the future, I will add it.
 
 <details>
@@ -29,8 +27,6 @@ UA Mod Menu is a **first ukrainian** mod menu for Gorilla Tag, made by me, [**va
 </details>
 <details>
   <summary><b>Українська</b></summary>
-UA Mod Menu
-
 UA Mod Menu - це **найперший український** мод меню для Gorilla Tag, зроблений мною, [**vanvani41**](https://github.com/vanvani41). На данний момент у меню немає української мови, але в майбутньому я додам її.
 
 <details>
@@ -41,7 +37,7 @@ UA Mod Menu - це **найперший український** мод меню
 <details>
   <summary><b>А можна використовувати код меню?</b></summary>
 	
-**Так, можна!** Але монке, ти матимеш проблему! **[Правила GPL-3.0 Ліцензії](https://www.gnu.org/licenses/gpl-3.0.html) прийняті**, тому якщо ти використовуватимеш мій код:  
+**Так, можна!** Але монке, ти матимеш проблему! **[Застосовуються умови ліцензії GPL-3.0.](https://www.gnu.org/licenses/gpl-3.0.html)**, тому якщо ти використовуватимеш мій код:  
 - Джерело твого проекту **також** повинно бути відкритим. 
 - Залишай кредит там, де він потрібен.
 - **[Слідкуй за ліцензією.](https://www.gnu.org/licenses/gpl-3.0.html)**
