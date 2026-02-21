@@ -8,15 +8,15 @@ namespace StupidTemplate.Classes
     public class ExtGradient
     {
         public static GradientColorKey[] GetSolidGradient(Color color) =>
-            new GradientColorKey[] { 
-                new GradientColorKey(color, 0f), 
-                new GradientColorKey(color, 1f) 
+            new GradientColorKey[] {
+                new GradientColorKey(color, 0f),
+                new GradientColorKey(color, 1f)
             };
 
         public static GradientColorKey[] GetSimpleGradient(Color a, Color b) =>
-            new GradientColorKey[] { 
-                new GradientColorKey(a, 0f), 
-                new GradientColorKey(b, 0.25f), 
+            new GradientColorKey[] {
+                new GradientColorKey(a, 0f),
+                new GradientColorKey(b, 0.25f),
                 new GradientColorKey(a, 0.5f),
                 new GradientColorKey(b, 0.75f),
                 new GradientColorKey(a, 1f)

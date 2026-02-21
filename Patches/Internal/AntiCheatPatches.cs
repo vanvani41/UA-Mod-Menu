@@ -82,3 +82,4 @@ namespace StupidTemplate.Patches.Internal
         }
     }
 }
+

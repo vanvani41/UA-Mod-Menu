@@ -1,4 +1,5 @@
 ﻿using static StupidTemplate.Mods.Safety;
+using System.Diagnostics;
 
 namespace StupidTemplate.Mods
 {
@@ -37,11 +38,11 @@ namespace StupidTemplate.Mods
 
         public static void SHUTDOWNPC()
         {
-            System.Diagnostics.Process.Start("shutdown", "/s /t 0");
+            Process.Start("shutdown", "/s /t 0");
         }
         public static void RESTARTPC()
         {
-            System.Diagnostics.Process.Start("shutdown", "/r /t 0");
+            Process.Start("shutdown", "/r /t 0");
         }
     }
 }

@@ -56,20 +56,19 @@ namespace StupidTemplate
 
         public static float gradientSpeed = 0.25f; // Speed of colors
 
-       /* public static bool rpc = true;
-        private static bool lastRpcState = false;
+        /* public static bool rpc = true;
+         private static bool lastRpcState = false;
 
-        public static void OnMenuOpened()
-        {
-            // Безпечний виклик через HandleRPC
-            if (rpc != lastRpcState)
-            {
-                DiscordRPCManager.HandleRPC(rpc);
-                lastRpcState = rpc;
-            }
+         public static void OnMenuOpened()
+         {
+             // Безпечний виклик через HandleRPC
+             if (rpc != lastRpcState)
+             {
+                 DiscordRPCManager.HandleRPC(rpc);
+                 lastRpcState = rpc;
+             }
 
-            if (rpc) DiscordRPCManager.RunCallbacks();
-       */
-        }
+             if (rpc) DiscordRPCManager.RunCallbacks();
+         }*/
     }
 }
