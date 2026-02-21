@@ -22,7 +22,7 @@ UA Mod Menu is a **first ukrainian** mod menu for Gorilla Tag, made by me, [**va
   <summary><b>How to install the mod menu?</b></summary>
 	
 1. **Download** the latest release **[right here](https://github.com/vanvani41/UA-Mod-Menu/releases/latest)**
-2. **Save ** `UA Mod Menu.dll` into your Gorilla Tag/BepInEx/plugins folder  
+2. **Save ** `UA.Mod.Menu.dll` into your Gorilla Tag/BepInEx/plugins folder  
 3. **Launch Gorilla Tag and enjoy!**
 </details>
 </details>
@@ -49,7 +49,7 @@ UA Мод Меню - це **найперший український** мод �
   <summary><b>Як встановити мод меню?</b></summary>
 	
 1. **Завантаж** останній реліз **[ось тут](https://github.com/vanvani41/UA-Mod-Menu/releases/latest)**
-2. **Збережи ** `UA Mod Menu.dll` у папку Gorilla Tag/BepInEx/plugins  
+2. **Збережи ** `UA.Mod.Menu.dll` у папку Gorilla Tag/BepInEx/plugins  
 3. **Запускай Gorilla Tag та веселись!**
 </details>
 </details>
