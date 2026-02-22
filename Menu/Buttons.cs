@@ -42,6 +42,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Change Speedboost Speed", overlapText = "Change Speedboost Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeSpeedboostSpeed(), isTogglable = false, toolTip = "Changes the speed of the speedboost mod."},
                 new ButtonInfo { buttonText = "Change WASD Fly Speed", overlapText = "Change WASD Fly Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeWASDSpeed(), isTogglable = false, toolTip = "Changes the speed of the WASD fly mod."},
                 new ButtonInfo { buttonText = "Change Car Monke Speed", overlapText = "Change Car Monke Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeCarMonkeSpeed(), isTogglable = false, toolTip = "Changes the speed of the car monke mod."},
+                new ButtonInfo { buttonText = "Change Pull Speed", overlapText = "Change Pull Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangePullSpeed(), isTogglable = false, toolTip = "Changes the speed of the pull mod."},
             },
 
             new ButtonInfo[] { // Room Mods [4]
@@ -58,13 +59,17 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Sticky Platforms <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.GripStickyPlatforms(), toolTip = "Spawns platforms on your hands when pressing grip."},
                 new ButtonInfo { buttonText = "Sticky Platforms <color=gray>[</color><color=green> T </color><color=gray>]</color>", method =() => Movement.TriggerStickyPlatforms(), toolTip = "Spawns platforms on your hands when pressing trigger."},
                 new ButtonInfo { buttonText = "Fly <color=gray>[</color><color=green> A </color><color=gray>]</color>", method =() => Movement.Fly(), toolTip = "Sends you forward when holding A."},
+                new ButtonInfo { buttonText = "Noclip Fly <color=gray>[</color><color=green> A </color><color=gray>]</color>", method =() => Movement.Fly(), toolTip = "Sends you forward when holding A with Noclip."},
                 new ButtonInfo { buttonText = "WASD Fly <color=gray>[</color><color=green> WASD </color><color=gray>]</color>", method =() => Movement.WASDFly(), toolTip = "Fly on WASD!!"},
-                new ButtonInfo { buttonText = "Noclip <color=gray>[</color><color=green> RT </color><color=gray>]</color>", method =() => Movement.Noclip(), toolTip = "Noclips you when holding right trigger."},
+                new ButtonInfo { buttonText = "Noclip <color=gray>[</color><color=green> RT </color><color=gray>]</color>", method =() => Movement.NoclipRT(), toolTip = "Noclips you when holding right trigger."},
+                new ButtonInfo { buttonText = "Noclip <color=gray>[</color><color=green> LT </color><color=gray>]</color>", method =() => Movement.NoclipLT(), toolTip = "Noclips you when holding right trigger."},
                 new ButtonInfo { buttonText = "Speedboost", method =() => Movement.Speedboost(), toolTip = "Makes you faster."},
                 new ButtonInfo { buttonText = "Teleport Gun <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.TeleportGun(), toolTip = "Teleports you to wherever your pointer is when pressing trigger."},
                 new ButtonInfo { buttonText = "Car Monke <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.CarMonke(), toolTip = "Ride forward when holding right grip and back when holding left grip."},
                 new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> X </color><color=gray>]</color>", method =() => Movement.GhostMonke(), toolTip = "Freezes you when holding X."},
                 new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> A </color><color=gray>]</color>", method =() => Movement.InvisMonke(), toolTip = "Making you invisible when holding A."},
+                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModR(), toolTip = "Pulls you when holding right grip."},
+                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModL(), toolTip = "Pulls you when holding left grip."},
             },
 
             new ButtonInfo[] { // Safety Mods [6]

@@ -30,7 +30,7 @@ namespace StupidTemplate.Mods
                 {
                     platgl = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     platgl.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
-                    platgl.transform.position = TrueLeftHand().position;
+                    platgl.transform.position = TrueLeftHand().position - (Vector3.up * 0.1f);
                     platgl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders(platgl);
                     platgl.AddComponent<ColorChanger>().colors = StupidTemplate.Settings.backgroundColor;
@@ -48,7 +48,7 @@ namespace StupidTemplate.Mods
                 {
                     platgr = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     platgr.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
-                    platgr.transform.position = TrueRightHand().position;
+                    platgr.transform.position = TrueRightHand().position - (Vector3.up * 0.1f);
                     platgr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders(platgr);
                     platgr.AddComponent<ColorChanger>().colors = StupidTemplate.Settings.backgroundColor;
@@ -71,7 +71,7 @@ namespace StupidTemplate.Mods
                 {
                     plattl = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     plattl.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
-                    plattl.transform.position = TrueLeftHand().position;
+                    plattl.transform.position = TrueLeftHand().position - (Vector3.up * 0.1f);
                     plattl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders(plattl);
                     plattl.AddComponent<ColorChanger>().colors = StupidTemplate.Settings.backgroundColor;
@@ -88,7 +88,7 @@ namespace StupidTemplate.Mods
                 {
                     plattr = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     plattr.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
-                    plattr.transform.position = TrueRightHand().position;
+                    plattr.transform.position = TrueRightHand().position - (Vector3.up * 0.1f);
                     plattr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders(plattr);
                     plattr.AddComponent<ColorChanger>().colors = StupidTemplate.Settings.backgroundColor;
@@ -110,7 +110,7 @@ namespace StupidTemplate.Mods
                 if (platsgl == null)
                 {
                     platsgl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgl.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
+                    platsgl.transform.localScale = new Vector3(0.025f, 0.3f, 1f);
                     platsgl.transform.position = TrueLeftHand().position;
                     platsgl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders(platsgl);
@@ -127,7 +127,7 @@ namespace StupidTemplate.Mods
                 if (platsgr == null)
                 {
                     platsgr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgr.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
+                    platsgr.transform.localScale = new Vector3(0.025f, 0.3f, 1f);
                     platsgr.transform.position = TrueRightHand().position;
                     platsgr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders(platsgr);
@@ -150,7 +150,7 @@ namespace StupidTemplate.Mods
                 if (platstl == null)
                 {
                     platstl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstl.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
+                    platstl.transform.localScale = new Vector3(0.025f, 0.3f, 1f);
                     platstl.transform.position = TrueLeftHand().position;
                     platstl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders(platstl);
@@ -167,7 +167,7 @@ namespace StupidTemplate.Mods
                 if (platstr == null)
                 {
                     platstr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstr.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
+                    platstr.transform.localScale = new Vector3(0.025f, 0.3f, 1f);
                     platstr.transform.position = TrueRightHand().position;
                     platstr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders(platstr);
@@ -201,8 +201,17 @@ namespace StupidTemplate.Mods
         }
         public static void Speedboost()
         {
-            GTPlayer.Instance.maxJumpSpeed = Settings.Movement.Speedboost;
-            GTPlayer.Instance.jumpMultiplier = Settings.Movement.Speedboost;
+            bool speedboost = true;
+            if (speedboost == true)
+            {
+                GTPlayer.Instance.maxJumpSpeed = Settings.Movement.Speedboost;
+                GTPlayer.Instance.jumpMultiplier = Settings.Movement.Speedboost;
+            }
+            else
+            {
+                    GTPlayer.Instance.maxJumpSpeed = 6.5f;
+                    GTPlayer.Instance.jumpMultiplier = 1.1f;
+            }
         }
         public static void GhostMonke()
         {
@@ -217,17 +226,28 @@ namespace StupidTemplate.Mods
         }
         public static void InvisMonke()
         {
-            if (ControllerInputPoller.instance.rightControllerPrimaryButton)
+            var rig = GorillaTagger.Instance.offlineVRRig;
+            if (rig == null) return;
+
+            bool isPressed = ControllerInputPoller.instance.rightControllerPrimaryButton;
+
+            // Вимикаємо основний меш тіла
+            if (rig.mainSkin != null)
             {
-                GorillaTagger.Instance.offlineVRRig.headMesh.gameObject.SetActive(false);
-                GorillaTagger.Instance.offlineVRRig.mainSkin.gameObject.SetActive(false);
+                rig.mainSkin.enabled = !isPressed;
             }
-            else
+
+            // Якщо headMesh видає помилку, шукаємо голову через трансформ
+            // Зазвичай модель голови є дитиною об'єкта "head" або частиною mainSkin
+            var headTransform = rig.head.rigTarget.transform;
+            // Або спробуй вимкнути рендерери у всіх дочірніх об'єктах:
+            foreach (var renderer in rig.GetComponentsInChildren<Renderer>())
             {
-                GorillaTagger.Instance.offlineVRRig.headMesh.SetActive(true);
-                GorillaTagger.Instance.offlineVRRig.mainSkin.gameObject.SetActive(true);
+                renderer.enabled = !isPressed;
             }
         }
+
+
         public static void WASDFly()
         {
             if (UnityInput.Current.GetKey(KeyCode.W))
@@ -261,7 +281,7 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
             }
         }
-        public static void Noclip()
+        public static void NoclipRT()
         {
             bool isTriggerPressed = ControllerInputPoller.instance.rightControllerTriggerButton;
             MeshCollider[] colliders = Resources.FindObjectsOfTypeAll<MeshCollider>();
@@ -270,6 +290,47 @@ namespace StupidTemplate.Mods
                 foreach (MeshCollider collider in colliders)
                 {
                     collider.enabled = false;
+                }
+            }
+            else
+            {
+                foreach (MeshCollider collider in colliders)
+                {
+                    collider.enabled = true;
+                }
+            }
+        }
+        public static void NoclipLT()
+        {
+            bool isTriggerPressed = ControllerInputPoller.instance.leftControllerTriggerButton;
+            MeshCollider[] colliders = Resources.FindObjectsOfTypeAll<MeshCollider>();
+            if (isTriggerPressed)
+            {
+                foreach (MeshCollider collider in colliders)
+                {
+                    collider.enabled = false;
+                }
+            }
+            else
+            {
+                foreach (MeshCollider collider in colliders)
+                {
+                    collider.enabled = true;
+                }
+            }
+        }
+
+        public static void NoclipFly()
+        {
+            bool isTriggerPressed = ControllerInputPoller.instance.rightControllerPrimaryButton;
+            MeshCollider[] colliders = Resources.FindObjectsOfTypeAll<MeshCollider>();
+            if (isTriggerPressed)
+            {
+                foreach (MeshCollider collider in colliders)
+                {
+                    collider.enabled = false;
+                    GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.flySpeed;
+                    GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
                 }
             }
             else
@@ -289,6 +350,21 @@ namespace StupidTemplate.Mods
             if (ControllerInputPoller.instance.rightGrab)
             {
                 GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
+            }
+        }
+
+        public static void PullModR()
+        {
+            if (ControllerInputPoller.instance.rightGrab)
+            {
+                GTPlayer.Instance.transform.position = GTPlayer.Instance.transform.position * Settings.Movement.PullSpeed;
+            }
+        }
+        public static void PullModL()
+        {
+            if (ControllerInputPoller.instance.leftGrab)
+            {
+                GTPlayer.Instance.transform.position = GTPlayer.Instance.transform.position * Settings.Movement.PullSpeed;
             }
         }
     }

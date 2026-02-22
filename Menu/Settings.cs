@@ -34,7 +34,7 @@ namespace StupidTemplate
         public static ExtGradient[] buttonColors = new ExtGradient[]
         {
             new ExtGradient { colors = ExtGradient.GetSolidGradient(Color.black) }, // Disabled
-            new ExtGradient { colors = ExtGradient.GetSimple3Gradient(Color.black, Color.darkRed, Color.red) } // Enabled
+            new ExtGradient { colors = ExtGradient.GetSimple3Gradient(Color.black, Color.red, Color.black) } // Enabled
         };
         public static Color[] textColors = new Color[]
         {

@@ -10,7 +10,7 @@ namespace StupidTemplate.Mods.Settings
         public static void ChangeFlySpeed()
         {
             string[] flyNames = new string[] { "Extra Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Extra Fast" };
-            float[] flyValues = new float[] { 3f, 5f, 10f, 15f, 20f, 30f, 50f };
+            float[] flyValues = new float[] { 3f, 5f, 8f, 10f, 15f, 20f, 25f };
 
             flySpeedIndex++;
             flySpeedIndex %= flyNames.Length;
@@ -24,7 +24,7 @@ namespace StupidTemplate.Mods.Settings
         public static void ChangeSpeedboostSpeed()
         {
             string[] speedNames = new string[] { "Extra Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Extra Fast" };
-            float[] speedValues = new float[] { 3f, 5f, 7f, 9f, 13f, 16f, 21f };
+            float[] speedValues = new float[] { 2.5f, 3f, 5f, 7f, 10f, 13f, 15f };
 
             SpeedboostIndex++;
             SpeedboostIndex %= speedNames.Length;
@@ -38,7 +38,7 @@ namespace StupidTemplate.Mods.Settings
         public static void ChangeWASDSpeed()
         {
             string[] WASDNames = new string[] { "Extra Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Extra Fast" };
-            float[] WASDValues = new float[] { 3f, 5f, 10f, 15f, 20f, 30f, 50f };
+            float[] WASDValues = new float[] { 3f, 5f, 8f, 10f, 15f, 20f, 25f };
 
             WASDSpeedIndex++;
             WASDSpeedIndex %= WASDNames.Length;
@@ -52,12 +52,26 @@ namespace StupidTemplate.Mods.Settings
         public static void ChangeCarMonkeSpeed()
         {
             string[] CarNames = new string[] { "Extra Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Extra Fast" };
-            float[] CarValues = new float[] { 3f, 5f, 10f, 15f, 20f, 30f, 50f };
+            float[] CarValues = new float[] { 3f, 5f, 8f, 10f, 15f, 20f, 25f };
 
             CarMonkeSpeedIndex++;
             CarMonkeSpeedIndex %= CarNames.Length;
 
             GetIndex("Change Car Monke Speed").overlapText = $"Change Car Monke Speed <color=gray>[</color><color=green>{CarNames[CarMonkeSpeedIndex]}</color><color=gray>]</color>";
+        }
+
+        public static int PullIndex = 3;
+        public static float PullSpeed = 15f;
+
+        public static void ChangePullSpeed()
+        {
+            string[] PullNames = new string[] { "Extra Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Extra Fast" };
+            float[] PullValues = new float[] { 3f, 5f, 10f, 15f, 20f, 30f, 50f };
+
+            PullIndex++;
+            PullIndex %= PullNames.Length;
+
+            GetIndex("Change Pull Speed").overlapText = $"Change Pull Speed <color=gray>[</color><color=green>{PullNames[PullIndex]}</color><color=gray>]</color>";
         }
     }
 }
