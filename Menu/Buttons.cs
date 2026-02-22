@@ -21,17 +21,18 @@ namespace StupidTemplate.Menu
 
             new ButtonInfo[] { // Settings [1]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
+
                 new ButtonInfo { buttonText = "Menu", method =() => currentCategory = 2, isTogglable = false, toolTip = "Opens the settings for the menu."},
                 new ButtonInfo { buttonText = "Movement", method =() => currentCategory = 3, isTogglable = false, toolTip = "Opens the movement settings for the menu."},
             },
 
             new ButtonInfo[] { // Menu Settings [2]
                 new ButtonInfo { buttonText = "Return to Settings", method =() => currentCategory = 1, isTogglable = false, toolTip = "Returns to the main settings page for the menu."},
+
                 new ButtonInfo { buttonText = "Right Hand", enableMethod =() => rightHanded = true, disableMethod =() => rightHanded = false, toolTip = "Puts the menu on your right hand."},
                 new ButtonInfo { buttonText = "Notifications", enableMethod =() => disableNotifications = false, disableMethod =() => disableNotifications = true, enabled = !disableNotifications, toolTip = "Toggles the notifications."},
                 new ButtonInfo { buttonText = "FPS Counter", enableMethod =() => fpsCounter = true, disableMethod =() => fpsCounter = false, enabled = fpsCounter, toolTip = "Toggles the FPS counter."},
                 new ButtonInfo { buttonText = "Disconnect Button", enableMethod =() => disconnectButton = true, disableMethod =() => disconnectButton = false, enabled = disconnectButton, toolTip = "Toggles the disconnect button."},
-                /*new ButtonInfo { buttonText = "Discord Rich Presence", enableMethod =() => rpc = true, disableMethod =() => rpc = false, enabled = rpc, toolTip = "Toggles the Discord Rich Presence."},*/
             },
 
             new ButtonInfo[] { // Movement Settings [3]
@@ -94,8 +95,8 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Color Nametags", method =() => Nametags.colorTags = !Nametags.colorTags, toolTip = "Turns on Color Nametag."},
                 new ButtonInfo { buttonText = "Platform Nametags", method =() => Nametags.platformTags = !Nametags.platformTags, toolTip = "Turns on Platform Nametag."},
                 new ButtonInfo { buttonText = "Mods Nametags", method =() => Nametags.modsTags = !Nametags.modsTags, toolTip = "Turns on Mods Nametag."},
-                new ButtonInfo { buttonText = "FPS Nametags", method =() => Nametags.fpsTags = !Nametags.fpsTags, toolTip = "Turns on FPS Nametag."},
-                new ButtonInfo { buttonText = "HZ Nametags", method =() => Nametags.hzTags = !Nametags.hzTags, toolTip = "Turns on HZ Nametag."},
+                new ButtonInfo { buttonText = "FPS Nametags", method =() => Nametags.fpsTags = !Nametags.fpsTags, toolTip = "Turns on Frames Per Second Nametag."},
+                new ButtonInfo { buttonText = "HZ Nametags", method =() => Nametags.hzTags = !Nametags.hzTags, toolTip = "Turns on Hertz Nametag."},
                 new ButtonInfo { buttonText = "Lag Nametags", method =() => Nametags.lagTags = !Nametags.lagTags, toolTip = "Turns on Lag Nametag."},
             },
         };

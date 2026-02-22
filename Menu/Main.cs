@@ -33,7 +33,6 @@ namespace StupidTemplate.Menu
     [HarmonyPatch(typeof(GTPlayer), "LateUpdate")]
     public class Main : MonoBehaviour
     {
-
         // Constant
         public static void Prefix()
         {
@@ -257,8 +256,8 @@ namespace StupidTemplate.Menu
                     gameObject.GetComponent<BoxCollider>().isTrigger = true;
                     gameObject.transform.parent = menu.transform;
                     gameObject.transform.rotation = Quaternion.identity;
-                    gameObject.transform.localScale = new Vector3(0.09f, 0.2f, 0.9f);
-                    gameObject.transform.localPosition = new Vector3(0.56f, 0.65f, 0);
+                    gameObject.transform.localScale = new Vector3(0.09f, 0.2f, 1f);
+                    gameObject.transform.localPosition = new Vector3(0.56f, 1f, 0);
                     gameObject.GetComponent<Renderer>().material.color = buttonColors[0].colors[0].color;
                     gameObject.AddComponent<Classes.Button>().relatedText = "PreviousPage";
 
@@ -273,7 +272,7 @@ namespace StupidTemplate.Menu
                         }
                     }.AddComponent<Text>();
                     text.font = currentFont;
-                    text.text = "<";
+                    text.text = "";
                     text.fontSize = 1;
                     text.color = textColors[0];
                     text.alignment = TextAnchor.MiddleCenter;
@@ -294,8 +293,8 @@ namespace StupidTemplate.Menu
                     gameObject.GetComponent<BoxCollider>().isTrigger = true;
                     gameObject.transform.parent = menu.transform;
                     gameObject.transform.rotation = Quaternion.identity;
-                    gameObject.transform.localScale = new Vector3(0.09f, 0.2f, 0.9f);
-                    gameObject.transform.localPosition = new Vector3(0.56f, -0.65f, 0);
+                    gameObject.transform.localScale = new Vector3(0.09f, 0.2f, 1f);
+                    gameObject.transform.localPosition = new Vector3(0.56f, -1f, 0);
                     gameObject.GetComponent<Renderer>().material.color = buttonColors[0].colors[0].color;
                     gameObject.AddComponent<Classes.Button>().relatedText = "NextPage";
 
@@ -310,7 +309,7 @@ namespace StupidTemplate.Menu
                         }
                     }.AddComponent<Text>();
                     text.font = currentFont;
-                    text.text = ">";
+                    text.text = " ";
                     text.fontSize = 1;
                     text.color = textColors[0];
                     text.alignment = TextAnchor.MiddleCenter;
@@ -338,7 +337,7 @@ namespace StupidTemplate.Menu
             gameObject.GetComponent<BoxCollider>().isTrigger = true;
             gameObject.transform.parent = menu.transform;
             gameObject.transform.rotation = Quaternion.identity;
-            gameObject.transform.localScale = new Vector3(0.09f, 0.9f, 0.08f);
+            gameObject.transform.localScale = new Vector3(0.09f, 1.3f, 0.08f);
             gameObject.transform.localPosition = new Vector3(0.56f, 0f, 0.28f - offset);
             gameObject.AddComponent<Classes.Button>().relatedText = method.buttonText;
 
@@ -676,7 +675,7 @@ namespace StupidTemplate.Menu
 
             if (GunLine == null)
             {
-                GameObject line = new GameObject("StupidTemplate_GunLine");
+                GameObject line = new GameObject("iiMenu_GunLine");
                 GunLine = line.AddComponent<LineRenderer>();
             }
 

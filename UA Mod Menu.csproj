@@ -19,9 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-	<!--<Reference Include="DiscordRPC" Publicize="true">
-      <HintPath>$(PluginsPath)\DiscordRPC.dll</HintPath>
-    </Reference>-->
     <Reference Include="Assembly-CSharp" Publicize="true">
       <HintPath>$(GameAssemblyPath)\Assembly-CSharp.dll</HintPath>
     </Reference>

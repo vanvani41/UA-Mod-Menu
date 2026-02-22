@@ -51,24 +51,9 @@ namespace StupidTemplate
 
         public static KeyCode keyboardButton = KeyCode.Q;
 
-        public static Vector3 menuSize = new Vector3(0.1f, 1f, 1f); // Depth, width, height
+        public static Vector3 menuSize = new Vector3(0.1f, 1.5f, 1f); // Depth, width, height
         public static int buttonsPerPage = 8;
 
         public static float gradientSpeed = 0.25f; // Speed of colors
-
-        /* public static bool rpc = true;
-         private static bool lastRpcState = false;
-
-         public static void OnMenuOpened()
-         {
-             // Безпечний виклик через HandleRPC
-             if (rpc != lastRpcState)
-             {
-                 DiscordRPCManager.HandleRPC(rpc);
-                 lastRpcState = rpc;
-             }
-
-             if (rpc) DiscordRPCManager.RunCallbacks();
-         }*/
     }
 }
