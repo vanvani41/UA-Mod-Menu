@@ -48,7 +48,18 @@ namespace StupidTemplate.Menu
             new ButtonInfo[] { // Room Mods [4]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
-                new ButtonInfo { buttonText = "Disconnect", method =() => NetworkSystem.Instance.ReturnToSinglePlayer(), isTogglable = false, toolTip = "Disconnects you from the room."},
+                new ButtonInfo { buttonText = "Disconnect", method =() => Room.Disconnect(), isTogglable = false, toolTip = "Disconnects you from the room."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> UKRAINE </color><color=gray>]</color>", method =() => Room.JoinRoomUkraine(), isTogglable = false, toolTip = "Connects you to the room UKRAINE."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> UKRAINE1 </color><color=gray>]</color>", method =() => Room.JoinRoomUkraine1(), isTogglable = false, toolTip = "Connects you to the room UKRAINE1."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> UKRAINE2 </color><color=gray>]</color>", method =() => Room.JoinRoomUkraine2(), isTogglable = false, toolTip = "Connects you to the room UKRAINE2."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> UKRAINE3 </color><color=gray>]</color>", method =() => Room.JoinRoomUkraine3(), isTogglable = false, toolTip = "Connects you to the room UKRAINE3."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> UKRAINE4 </color><color=gray>]</color>", method =() => Room.JoinRoomUkraine4(), isTogglable = false, toolTip = "Connects you to the room UKRAINE4."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> UKRAINE5 </color><color=gray>]</color>", method =() => Room.JoinRoomUkraine5(), isTogglable = false, toolTip = "Connects you to the room UKRAINE5."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> VANVANI41 </color><color=gray>]</color>", method =() => Room.JoinRoomVanvani41(), isTogglable = false, toolTip = "Connects you to the room VANVANI41."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> V41FAN </color><color=gray>]</color>", method =() => Room.JoinRoomV41Fan(), isTogglable = false, toolTip = "Connects you to the room V41FAN."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> PBBV </color><color=gray>]</color>", method =() => Room.JoinRoomPBBV(), isTogglable = false, toolTip = "Connects you to the room PBBV."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> DAISY09 </color><color=gray>]</color>", method =() => Room.JoinRoomDAISY09(), isTogglable = false, toolTip = "Connects you to the DAISY09."},
+                new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> ECHO </color><color=gray>]</color>", method =() => Room.JoinRoomECHO(), isTogglable = false, toolTip = "Connects you to the room ECHO."},
             },
 
             new ButtonInfo[] { // Movement Mods [5]
@@ -66,8 +77,10 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Speedboost", method =() => Movement.Speedboost(), toolTip = "Makes you faster."},
                 new ButtonInfo { buttonText = "Teleport Gun <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.TeleportGun(), toolTip = "Teleports you to wherever your pointer is when pressing trigger."},
                 new ButtonInfo { buttonText = "Car Monke <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.CarMonke(), toolTip = "Ride forward when holding right grip and back when holding left grip."},
-                new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> X </color><color=gray>]</color>", method =() => Movement.GhostMonke(), toolTip = "Freezes you when holding X."},
-                new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> A </color><color=gray>]</color>", method =() => Movement.InvisMonke(), toolTip = "Making you invisible when holding A."},
+                new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XH </color><color=gray>]</color>", method =() => Movement.GhostMonkeH(), toolTip = "Freezes you when holding X."},
+                new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XT </color><color=gray>]</color>", method =() => Movement.GhostMonkeT(), toolTip = "Freezes you when pressing X."},
+                new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AH </color><color=gray>]</color>", method =() => Movement.InvisMonkeH(), toolTip = "Making you invisible when holding A."},
+                new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AT </color><color=gray>]</color>", method =() => Movement.InvisMonkeT(), toolTip = "Making you invisible when pressing A."},
                 new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModR(), toolTip = "Pulls you when holding right grip."},
                 new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModL(), toolTip = "Pulls you when holding left grip."},
             },
@@ -102,7 +115,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Mods Nametags", method =() => Nametags.modsTags = !Nametags.modsTags, toolTip = "Turns on Mods Nametag."},
                 new ButtonInfo { buttonText = "FPS Nametags", method =() => Nametags.fpsTags = !Nametags.fpsTags, toolTip = "Turns on Frames Per Second Nametag."},
                 new ButtonInfo { buttonText = "HZ Nametags", method =() => Nametags.hzTags = !Nametags.hzTags, toolTip = "Turns on Hertz Nametag."},
-                new ButtonInfo { buttonText = "Lag Nametags", method =() => Nametags.lagTags = !Nametags.lagTags, toolTip = "Turns on Lag Nametag."},
+                new ButtonInfo { buttonText = "Date Nametags", method =() => Nametags.infoTags = !Nametags.infoTags, toolTip = "Turns on Registration Date Nametag."},
             },
         };
     }

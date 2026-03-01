@@ -1,8 +1,10 @@
-﻿using GorillaLocomotion;
+﻿using BepInEx;
+using GorillaLocomotion;
+using Oculus.Interaction.Input;
 using StupidTemplate.Classes;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
-using BepInEx;
 using static StupidTemplate.Menu.Main;
 
 namespace StupidTemplate.Mods
@@ -110,7 +112,7 @@ namespace StupidTemplate.Mods
                 if (platsgl == null)
                 {
                     platsgl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgl.transform.localScale = new Vector3(0.025f, 0.3f, 1f);
+                    platsgl.transform.localScale = new Vector3(1f, 0.3f, 0.4f);
                     platsgl.transform.position = TrueLeftHand().position;
                     platsgl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders(platsgl);
@@ -127,7 +129,7 @@ namespace StupidTemplate.Mods
                 if (platsgr == null)
                 {
                     platsgr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgr.transform.localScale = new Vector3(0.025f, 0.3f, 1f);
+                    platsgr.transform.localScale = new Vector3(1f, 0.3f, 0.4f);
                     platsgr.transform.position = TrueRightHand().position;
                     platsgr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders(platsgr);
@@ -150,7 +152,7 @@ namespace StupidTemplate.Mods
                 if (platstl == null)
                 {
                     platstl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstl.transform.localScale = new Vector3(0.025f, 0.3f, 1f);
+                    platstl.transform.localScale = new Vector3(1f, 0.3f, 0.4f);
                     platstl.transform.position = TrueLeftHand().position;
                     platstl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders(platstl);
@@ -167,7 +169,7 @@ namespace StupidTemplate.Mods
                 if (platstr == null)
                 {
                     platstr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstr.transform.localScale = new Vector3(0.025f, 0.3f, 1f);
+                    platstr.transform.localScale = new Vector3(1f, 0.3f, 0.4f);
                     platstr.transform.position = TrueRightHand().position;
                     platstr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders(platstr);
@@ -213,9 +215,22 @@ namespace StupidTemplate.Mods
                     GTPlayer.Instance.jumpMultiplier = 1.1f;
             }
         }
-        public static void GhostMonke()
+        // Ці 4 рядки мають бути в самому верху класу
+        private static bool ghostOn;
+        private static bool ghostPressed;
+        public static void GhostMonkeT()
         {
-            if (ControllerInputPoller.instance.leftControllerPrimaryButton)
+            // Перевірка натискання (Toggle)
+            bool isDown = ControllerInputPoller.instance.leftControllerPrimaryButton;
+            if (isDown && !ghostPressed) ghostOn = !ghostOn;
+            ghostPressed = isDown;
+
+            // Сама робота мода
+            GorillaTagger.Instance.offlineVRRig.enabled = !ghostOn;
+        }
+        public static void GhostMonkeH()
+        {
+            if(ControllerInputPoller.instance.rightControllerPrimaryButton)
             {
                 GorillaTagger.Instance.offlineVRRig.enabled = false;
             }
@@ -224,29 +239,48 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.offlineVRRig.enabled = true;
             }
         }
-        public static void InvisMonke()
+
+        // ПЕРШИЙ ВОЇД: Тільки Hold (тримаєш — зникаєш)
+        public static void InvisMonkeH()
         {
-            var rig = GorillaTagger.Instance.offlineVRRig;
-            if (rig == null) return;
-
-            bool isPressed = ControllerInputPoller.instance.rightControllerPrimaryButton;
-
-            // Вимикаємо основний меш тіла
-            if (rig.mainSkin != null)
+            if (ControllerInputPoller.instance.rightControllerPrimaryButton)
             {
-                rig.mainSkin.enabled = !isPressed;
+                GorillaTagger.Instance.offlineVRRig.transform.up = Vector3.up * 9999999f;
             }
-
-            // Якщо headMesh видає помилку, шукаємо голову через трансформ
-            // Зазвичай модель голови є дитиною об'єкта "head" або частиною mainSkin
-            var headTransform = rig.head.rigTarget.transform;
-            // Або спробуй вимкнути рендерери у всіх дочірніх об'єктах:
-            foreach (var renderer in rig.GetComponentsInChildren<Renderer>())
+            else
             {
-                renderer.enabled = !isPressed;
+                GorillaTagger.Instance.offlineVRRig.transform.up = Vector3.up;
             }
         }
 
+        // ДРУГИЙ ВОЇД: Тільки Toggle (натиснув — зник, натиснув ще раз — з'явився)
+        private static bool invOn = false; // Стан невидимості
+        private static bool invPressed = false; // Для реєстрації одного натискання
+
+        public static void InvisMonkeT()
+        {
+            // Перевіряємо натискання правої основної кнопки (A або X залежно від контролера)
+            bool isDown = ControllerInputPoller.instance.rightControllerPrimaryButton;
+
+            // Логіка тугла: спрацьовує один раз при натисканні
+            if (isDown && !invPressed)
+            {
+                invOn = !invOn; // Змінюємо стан на протилежний
+
+                if (invOn)
+                {
+                    // Відправляємо ріг "вгору" (роблячи його невидимим для інших/себе)
+                    GorillaTagger.Instance.offlineVRRig.transform.position += Vector3.up * 9999f;
+                }
+                else
+                {
+                    // Повертаємо ріг на місце (хоча зазвичай позиція оновлюється сама)
+                    // У Gorilla Tag позиція ріга зазвичай прив'язана до камери
+                    GorillaTagger.Instance.offlineVRRig.transform.position = GorillaTagger.Instance.headCollider.transform.position;
+                }
+            }
+            invPressed = isDown; // Запам'ятовуємо стан кнопки
+        }
 
         public static void WASDFly()
         {
@@ -296,7 +330,7 @@ namespace StupidTemplate.Mods
             {
                 foreach (MeshCollider collider in colliders)
                 {
-                    collider.enabled = true;
+                    collider.enabled = false;
                 }
             }
         }
@@ -319,37 +353,17 @@ namespace StupidTemplate.Mods
                 }
             }
         }
-
-        public static void NoclipFly()
-        {
-            bool isTriggerPressed = ControllerInputPoller.instance.rightControllerPrimaryButton;
-            MeshCollider[] colliders = Resources.FindObjectsOfTypeAll<MeshCollider>();
-            if (isTriggerPressed)
-            {
-                foreach (MeshCollider collider in colliders)
-                {
-                    collider.enabled = false;
-                    GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.flySpeed;
-                    GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
-                }
-            }
-            else
-            {
-                foreach (MeshCollider collider in colliders)
-                {
-                    collider.enabled = true;
-                }
-            }
-        }
         public static void CarMonke()
         {
             if (ControllerInputPoller.instance.leftGrab)
             {
                 GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
+                GorillaTagger.Instance.rigidbody.linearVelocity -= Vector3.forward;
             }
             if (ControllerInputPoller.instance.rightGrab)
             {
                 GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.forward;
             }
         }
 
@@ -357,15 +371,125 @@ namespace StupidTemplate.Mods
         {
             if (ControllerInputPoller.instance.rightGrab)
             {
-                GTPlayer.Instance.transform.position = GTPlayer.Instance.transform.position * Settings.Movement.PullSpeed;
+                RaycastHit hit;
+                // Юзаємо те, що реально є в GTPlayer — посилання на руку
+                Transform hand = GTPlayer.Instance.GetControllerTransform(true);
+
+                if (Physics.Raycast(hand.position, hand.forward, out hit, 100f, GTPlayer.Instance.locomotionEnabledLayers))
+                {
+                    Vector3 direction = (hit.point - hand.position).normalized;
+                    float distance = Vector3.Distance(hit.point, hand.position);
+                    if (distance > 1.5f)
+                    {
+                        // Використовуємо linearVelocity, як ти і казав
+                        GTPlayer.Instance.bodyCollider.attachedRigidbody.linearVelocity = direction * Settings.Movement.PullSpeed;
+                    }
+                }
             }
         }
         public static void PullModL()
         {
             if (ControllerInputPoller.instance.leftGrab)
             {
-                GTPlayer.Instance.transform.position = GTPlayer.Instance.transform.position * Settings.Movement.PullSpeed;
+                RaycastHit hit;
+                // Юзаємо те, що реально є в GTPlayer — посилання на руку
+                Transform hand = GTPlayer.Instance.GetControllerTransform(true);
+
+                if (Physics.Raycast(hand.position, hand.forward, out hit, 100f, GTPlayer.Instance.locomotionEnabledLayers))
+                {
+                    Vector3 direction = (hit.point - hand.position).normalized;
+                    float distance = Vector3.Distance(hit.point, hand.position);
+                    if (distance > 1.5f)
+                    {
+                        // Використовуємо linearVelocity, як ти і казав
+                        GTPlayer.Instance.bodyCollider.attachedRigidbody.linearVelocity = direction * Settings.Movement.PullSpeed;
+                    }
+                }
             }
         }
+
+        // I TOOK FROM II STUPID MENU FROM HERE 
+        public static float pullPower = 0.05f;
+        public static readonly Dictionary<bool, bool> previousTouchingGround = new Dictionary<bool, bool>();
+        public static bool scaleWithPlayer = true;
+
+        public static void ProcessPullHandGL(bool left)
+        {
+            // Виправлено: тернарний оператор замінено на звичайну логіку
+            // Якщо рука не стискає хват — виходимо
+            if (left ? !ControllerInputPoller.instance.leftGrab : !ControllerInputPoller.instance.rightGrab)
+                return;
+
+            bool touchingGround = GTPlayer.Instance.IsHandTouching(left);
+            previousTouchingGround.TryGetValue(left, out bool wasTouchingGround);
+
+            if (!touchingGround && wasTouchingGround)
+            {
+                Vector3 normal = GTPlayer.Instance.lastHitInfoHand.normal;
+                Vector3 direction = GorillaTagger.Instance.rigidbody.linearVelocity.X_Z();
+                GTPlayer.Instance.transform.position += (direction - normal * Vector3.Dot(direction, normal)).normalized * (direction.magnitude / GTPlayer.Instance.maxJumpSpeed * (pullPower * 5f)) * (scaleWithPlayer ? GTPlayer.Instance.scale : 1f);
+            }
+
+            previousTouchingGround[left] = touchingGround;
+        }
+
+        public static void ProcessPullHandGR(bool right)
+        {
+            // Виправлено: використовуємо right для перевірки
+            if (right ? !ControllerInputPoller.instance.rightGrab : !ControllerInputPoller.instance.leftGrab)
+                return;
+
+            // Виправлено: замінено left на right у всіх параметрах
+            bool touchingGround = GTPlayer.Instance.IsHandTouching(right);
+            previousTouchingGround.TryGetValue(right, out bool wasTouchingGround);
+
+            if (!touchingGround && wasTouchingGround)
+            {
+                Vector3 normal = GTPlayer.Instance.lastHitInfoHand.normal;
+                Vector3 direction = GorillaTagger.Instance.rigidbody.linearVelocity.X_Z();
+                GTPlayer.Instance.transform.position += (direction - normal * Vector3.Dot(direction, normal)).normalized * (direction.magnitude / GTPlayer.Instance.maxJumpSpeed * (pullPower * 5f)) * (scaleWithPlayer ? GTPlayer.Instance.scale : 1f);
+            }
+
+            previousTouchingGround[right] = touchingGround;
+        }
+
+        public static void PullModGL()
+        {
+            ProcessPullHandGL(false);
+            ProcessPullHandGL(true);
+        }
+        public static void PullModGR()
+        {
+            ProcessPullHandGR(false);
+            ProcessPullHandGR(true);
+        }
+        public static void UpdateClipColliders(bool enabled)
+        {
+            foreach (MeshCollider v in Resources.FindObjectsOfTypeAll<MeshCollider>())
+                v.enabled = enabled;
+        }
+        public static bool noclip;
+        public static void NoclipFly()
+        {
+            if (ControllerInputPoller.instance.rightControllerPrimaryButton)
+            {
+                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * (Time.deltaTime * Settings.Movement.flySpeed);
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
+                if (!noclip)
+                {
+                    noclip = true;
+                    UpdateClipColliders(false);
+                }
+            }
+            else
+            {
+                if (noclip)
+                {
+                    noclip = false;
+                    UpdateClipColliders(true);
+                }
+            }
+        }
+        // TO HERE
     }
 }

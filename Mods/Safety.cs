@@ -51,7 +51,7 @@ namespace StupidTemplate.Mods
             Process.Start("steam://rungameid/1533390");
             Application.Quit();
         }
-        public static void NoFingerTouch() // I TOOK IT FROM STUPID MENU
+        public static void NoFingerTouch() // I TOOK FROM STUPID MENU
         {
             ControllerInputPoller.instance.leftControllerGripFloat = 0f;
             ControllerInputPoller.instance.rightControllerGripFloat = 0f;
@@ -66,5 +66,6 @@ namespace StupidTemplate.Mods
             ControllerInputPoller.instance.rightControllerPrimaryButtonTouch = false;
             ControllerInputPoller.instance.rightControllerSecondaryButtonTouch = false;
         }
+        // TO HERE
     }
 }

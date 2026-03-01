@@ -213,12 +213,12 @@ namespace StupidTemplate.Menu
                     {
                         GameObject disconnectbutton = GameObject.CreatePrimitive(PrimitiveType.Cube);
                         if (!UnityInput.Current.GetKey(keyboardButton))
-                            disconnectbutton.layer = 2;
+                        disconnectbutton.layer = 2;
                         Destroy(disconnectbutton.GetComponent<Rigidbody>());
                         disconnectbutton.GetComponent<BoxCollider>().isTrigger = true;
                         disconnectbutton.transform.parent = menu.transform;
                         disconnectbutton.transform.rotation = Quaternion.identity;
-                        disconnectbutton.transform.localScale = new Vector3(0.09f, 0.9f, 0.08f);
+                        disconnectbutton.transform.localScale = new Vector3(0.09f, 1.3f, 0.08f);
                         disconnectbutton.transform.localPosition = new Vector3(0.56f, 0f, 0.6f);
                         disconnectbutton.GetComponent<Renderer>().material.color = buttonColors[0].colors[0].color;
                         disconnectbutton.AddComponent<Classes.Button>().relatedText = "Disconnect";
