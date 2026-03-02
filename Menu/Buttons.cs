@@ -81,8 +81,8 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XT </color><color=gray>]</color>", method =() => Movement.GhostMonkeT(), toolTip = "Freezes you when pressing X."},
                 new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AH </color><color=gray>]</color>", method =() => Movement.InvisMonkeH(), toolTip = "Making you invisible when holding A."},
                 new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AT </color><color=gray>]</color>", method =() => Movement.InvisMonkeT(), toolTip = "Making you invisible when pressing A."},
-                //new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModGR(), toolTip = "Pulls you when holding right grip."},
-                //new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModGL(), toolTip = "Pulls you when holding left grip."},
+                //new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModLG(), toolTip = "Pulls you when holding right grip."},
+                //new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModRG(), toolTip = "Pulls you when holding left grip."},
             },
 
             new ButtonInfo[] { // Safety Mods [6]
@@ -109,13 +109,6 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
                 new ButtonInfo { buttonText = "Name Nametags", method =() => Nametags.nameTags = !Nametags.nameTags, toolTip = "Turns on Name Nametag."},
-                new ButtonInfo { buttonText = "ID Nametags", method =() => Nametags.idTags = !Nametags.idTags, toolTip = "Turns on ID Nametag."},
-                new ButtonInfo { buttonText = "Color Nametags", method =() => Nametags.colorTags = !Nametags.colorTags, toolTip = "Turns on Color Nametag."},
-                new ButtonInfo { buttonText = "Platform Nametags", method =() => Nametags.platformTags = !Nametags.platformTags, toolTip = "Turns on Platform Nametag."},
-                new ButtonInfo { buttonText = "Mods Nametags", method =() => Nametags.modsTags = !Nametags.modsTags, toolTip = "Turns on Mods Nametag."},
-                new ButtonInfo { buttonText = "FPS Nametags", method =() => Nametags.fpsTags = !Nametags.fpsTags, toolTip = "Turns on Frames Per Second Nametag."},
-                new ButtonInfo { buttonText = "HZ Nametags", method =() => Nametags.hzTags = !Nametags.hzTags, toolTip = "Turns on Hertz Nametag."},
-                new ButtonInfo { buttonText = "Date Nametags", method =() => Nametags.infoTags = !Nametags.infoTags, toolTip = "Turns on Registration Date Nametag."},
             },
         };
     }

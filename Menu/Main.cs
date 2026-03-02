@@ -158,30 +158,60 @@ namespace StupidTemplate.Menu
                 canvas.renderMode = RenderMode.WorldSpace;
                 canvasScaler.dynamicPixelsPerUnit = 1000f;
 
-            // Title and FPS
-                Text text = new GameObject
+            // Title and FPS and Version
+            Text version = new GameObject
+            {
+                transform =
                 {
-                    transform =
-                    {
-                        parent = canvasObject.transform
-                    }
-                }.AddComponent<Text>();
-                text.font = currentFont;
-                text.text = PluginInfo.Name + " <color=grey>[</color><color=white>" + (pageNumber + 1).ToString() + "</color><color=grey>]</color>";
-                text.fontSize = 1;
-                text.color = textColors[0];
-                text.supportRichText = true;
-                text.fontStyle = FontStyle.Italic;
-                text.alignment = TextAnchor.MiddleCenter;
-                text.resizeTextForBestFit = true;
-                text.resizeTextMinSize = 0;
-                RectTransform component = text.GetComponent<RectTransform>();
-                component.localPosition = Vector3.zero;
-                component.sizeDelta = new Vector2(0.28f, 0.05f);
-                component.position = new Vector3(0.06f, 0f, 0.165f);
-                component.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
+                    parent = canvasObject.transform
+                }
+            }.AddComponent<Text>();
 
-                if (fpsCounter)
+            Text text = new GameObject
+            {
+                transform =
+                {
+                    parent = canvasObject.transform
+                }
+            }.AddComponent<Text>();
+            version.font = currentFont;
+            version.text = PluginInfo.Version;
+            version.fontSize = 1;
+            version.color = Color.white;
+            version.supportRichText = true;
+            version.fontStyle = FontStyle.Italic;
+            version.alignment = TextAnchor.LowerLeft;
+            version.resizeTextForBestFit = true;
+            version.resizeTextMinSize = 0;
+
+            RectTransform versioncomponent = version.GetComponent<RectTransform>();
+            versioncomponent.sizeDelta = new Vector2(0.2f, 0.04f);
+            versioncomponent.localPosition = new Vector3(
+                -0.04f,  
+                0f,  
+                -0.001f    
+            );
+            versioncomponent.rotation = Quaternion.Euler(180f, 90f, 90f);
+
+            text.font = currentFont;
+            text.text = PluginInfo.Name + " <color=grey>[</color><color=white>" +
+                        (pageNumber + 1).ToString() +
+                        "</color><color=grey>]</color>";
+            text.fontSize = 1;
+            text.color = textColors[0];
+            text.supportRichText = true;
+            text.fontStyle = FontStyle.Italic;
+            text.alignment = TextAnchor.MiddleCenter;
+            text.resizeTextForBestFit = true;
+            text.resizeTextMinSize = 0;
+
+            RectTransform component = text.GetComponent<RectTransform>();
+            component.localPosition = Vector3.zero;
+            component.sizeDelta = new Vector2(0.28f, 0.05f);
+            component.position = new Vector3(0.06f, 0f, 0.165f);
+            component.rotation = Quaternion.Euler(180f, 90f, 90f);
+
+            if (fpsCounter)
                 {
                     fpsObject = new GameObject
                     {
@@ -588,26 +618,25 @@ namespace StupidTemplate.Menu
                 targetWorldScale.z / parentScale.z
             );
         }
-
         public static void FixStickyColliders(GameObject platform)
         {
             Vector3[] localPositions = new Vector3[]
             {
-                new Vector3(0, 1f, 0),
-                new Vector3(0, -1f, 0),
-                new Vector3(1f, 0, 0),
-                new Vector3(-1f, 0, 0),
-                new Vector3(0, 0, 1f),
-                new Vector3(0, 0, -1f)
+        new Vector3(0, 1f, 0),
+        new Vector3(0, -1f, 0),
+        new Vector3(1f, 0, 0),
+        new Vector3(-1f, 0, 0),
+        new Vector3(0, 0, 1f),
+        new Vector3(0, 0, -1f)
             };
             Quaternion[] localRotations = new Quaternion[]
             {
-                Quaternion.Euler(90, 0, 0),
-                Quaternion.Euler(-90, 0, 0),
-                Quaternion.Euler(0, -90, 0),
-                Quaternion.Euler(0, 90, 0),
-                Quaternion.identity,
-                Quaternion.Euler(0, 180, 0)
+        Quaternion.Euler(90, 0, 0),
+        Quaternion.Euler(-90, 0, 0),
+        Quaternion.Euler(0, -90, 0),
+        Quaternion.Euler(0, 90, 0),
+        Quaternion.identity,
+        Quaternion.Euler(0, 180, 0)
             };
             for (int i = 0; i < localPositions.Length; i++)
             {
@@ -627,6 +656,39 @@ namespace StupidTemplate.Menu
                 WorldScale(side, new Vector3(size, size, 0.01f));
                 side.GetComponent<Renderer>().enabled = false;
             }
+        }
+
+        public static void FixStickyColliders1(GameObject platform)
+        {
+            Vector3[] normals =
+            {
+        Vector3.up, Vector3.down,
+        Vector3.left, Vector3.right,
+        Vector3.forward, Vector3.back
+    };
+
+            var surface = platform.GetComponent<GorillaSurfaceOverride>();
+
+            foreach (var normal in normals)
+            {
+                GameObject side = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+                side.transform.SetParent(platform.transform);
+                side.transform.localPosition = normal * 0.5f;
+                side.transform.localRotation = Quaternion.LookRotation(normal);
+                side.transform.localScale = new Vector3(1f, 1f, 0.02f);
+
+                if (surface != null)
+                    side.AddComponent<GorillaSurfaceOverride>().overrideIndex = surface.overrideIndex;
+
+                Destroy(side.GetComponent<MeshRenderer>());
+            }
+
+            var main = platform.GetComponent<BoxCollider>();
+            if (main == null)
+                main = platform.AddComponent<BoxCollider>();
+
+            main.isTrigger = true;
         }
 
         private static int? noInvisLayerMask;

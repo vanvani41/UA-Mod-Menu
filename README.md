@@ -1,6 +1,6 @@
 <details>
   <summary><b>English</b></summary>
-UA Mod Menu is a **first ukrainian** mod menu for Gorilla Tag, made by me, [**vanvani41**](https://github.com/vanvani41). Right now you can't use ukrainian language, but in the future, I will add it. Also, i used [iis Stupid Template](https://github.com/iiDk-the-actual/iis.Stupid.Template) and Gemini for fixes to make UA Mod Menu.
+UA Mod Menu is a **first ukrainian** mod menu for Gorilla Tag, made by me, [**vanvani41**](https://github.com/vanvani41). Right now you can't use ukrainian language, but in the future, I will add it. Also, i used [iis Stupid Template](https://github.com/iiDk-the-actual/iis.Stupid.Template) and ChatGPT for fixes to make UA Mod Menu.
 
 
 <details>
@@ -28,7 +28,7 @@ UA Mod Menu is a **first ukrainian** mod menu for Gorilla Tag, made by me, [**va
 </details>
 <details>
   <summary><b>Українська</b></summary>
-UA Мод Меню - це **найперший український** мод меню для Gorilla Tag, зроблений мною, [**vanvani41**](https://github.com/vanvani41). На данний момент у меню немає української мови, але в майбутньому я додам її. Також, я використовував [iis Stupid Template](https://github.com/iiDk-the-actual/iis.Stupid.Template) та Геміні для фіксів щоб зробити UA Мод Меню.
+UA Мод Меню - це **найперший український** мод меню для Gorilla Tag, зроблений мною, [**vanvani41**](https://github.com/vanvani41). На данний момент у меню немає української мови, але в майбутньому я додам її. Також, я використовував [iis Stupid Template](https://github.com/iiDk-the-actual/iis.Stupid.Template) та ЧатGPT для фіксів щоб зробити UA Мод Меню.
 
 <details>
   <summary><b>Чому джерело меню відкрите?</b></summary>

@@ -25,7 +25,6 @@ namespace StupidTemplate.Mods
 
         public static void GripPlatforms()
         {
-            // ЛІВА РУКА
             if (ControllerInputPoller.instance.leftGrab)
             {
                 if (platgl == null)
@@ -42,8 +41,6 @@ namespace StupidTemplate.Mods
             {
                 if (platgl != null) { Object.Destroy(platgl); platgl = null; }
             }
-
-            // ПРАВА РУКА
             if (ControllerInputPoller.instance.rightGrab)
             {
                 if (platgr == null)
@@ -111,11 +108,11 @@ namespace StupidTemplate.Mods
             {
                 if (platsgl == null)
                 {
-                    platsgl = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    platsgl.transform.localScale = new Vector3(2f, 0.3f, 0.4f);
+                    platsgl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    platsgl.transform.localScale = new Vector3(0.25f, 0.3f, 0.4f);
                     platsgl.transform.position = TrueLeftHand().position;
                     platsgl.transform.rotation = TrueLeftHand().rotation;
-                    FixStickyColliders(platsgl);
+                    FixStickyColliders1(platsgl);
                     platsgl.AddComponent<ColorChanger>().colors = StupidTemplate.Settings.backgroundColor;
                 }
             }
@@ -128,11 +125,11 @@ namespace StupidTemplate.Mods
             {
                 if (platsgr == null)
                 {
-                    platsgr = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    platsgr.transform.localScale = new Vector3(2f, 0.3f, 0.4f);
+                    platsgr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    platsgr.transform.localScale = new Vector3(0.25f, 0.3f, 0.4f);
                     platsgr.transform.position = TrueRightHand().position;
                     platsgr.transform.rotation = TrueRightHand().rotation;
-                    FixStickyColliders(platsgr);
+                    FixStickyColliders1(platsgr);
                     platsgr.AddComponent<ColorChanger>().colors = StupidTemplate.Settings.backgroundColor;
                 }
             }
@@ -151,11 +148,11 @@ namespace StupidTemplate.Mods
             {
                 if (platstl == null)
                 {
-                    platstl = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    platstl.transform.localScale = new Vector3(2f, 0.3f, 0.4f);
+                    platstl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    platstl.transform.localScale = new Vector3(0.25f, 0.3f, 0.4f);
                     platstl.transform.position = TrueLeftHand().position;
                     platstl.transform.rotation = TrueLeftHand().rotation;
-                    FixStickyColliders(platstl);
+                    FixStickyColliders1(platstl);
                     platstl.AddComponent<ColorChanger>().colors = StupidTemplate.Settings.backgroundColor;
                 }
             }
@@ -168,11 +165,11 @@ namespace StupidTemplate.Mods
             {
                 if (platstr == null)
                 {
-                    platstr = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    platstr.transform.localScale = new Vector3(2f, 0.3f, 0.4f);
+                    platstr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                    platstr.transform.localScale = new Vector3(0.25f, 0.3f, 0.4f);
                     platstr.transform.position = TrueRightHand().position;
                     platstr.transform.rotation = TrueRightHand().rotation;
-                    FixStickyColliders(platstr);
+                    FixStickyColliders1(platstr);
                     platstr.AddComponent<ColorChanger>().colors = StupidTemplate.Settings.backgroundColor;
                 }
             }
@@ -215,19 +212,50 @@ namespace StupidTemplate.Mods
                     GTPlayer.Instance.jumpMultiplier = 1.1f;
             }
         }
-        // Ці 4 рядки мають бути в самому верху класу
-        private static bool ghostOn;
-        private static bool ghostPressed;
+        public static bool ghostOn = false;
+        public static bool ghostPressed = false;
+
+        public static bool invOn = false;
+        public static bool invPressed = false;
+
         public static void GhostMonkeT()
         {
-            // Перевірка натискання (Toggle)
             bool isDown = ControllerInputPoller.instance.leftControllerPrimaryButton;
             if (isDown && !ghostPressed) ghostOn = !ghostOn;
             ghostPressed = isDown;
 
-            // Сама робота мода
-            GorillaTagger.Instance.offlineVRRig.enabled = !ghostOn;
+            UpdateRigState();
         }
+
+        public static void InvisMonkeH()
+        {
+            bool invHold = ControllerInputPoller.instance.rightControllerPrimaryButton;
+            UpdateRigState(invHold);
+        }
+
+        public static void InvisMonkeT()
+        {
+            bool isDown = ControllerInputPoller.instance.rightControllerPrimaryButton;
+            if (isDown && !invPressed) invOn = !invOn;
+            invPressed = isDown;
+
+            UpdateRigState(false);
+        }
+
+        private static void UpdateRigState(bool invHold = false)
+        {
+            var rig = GorillaTagger.Instance.offlineVRRig;
+
+            bool invisActive = invOn || invHold;
+
+            rig.enabled = !(ghostOn || invisActive);
+
+            if (invisActive)
+                rig.transform.position = Vector3.up * 9999f;
+            else if (!ghostOn)
+                rig.transform.position = GorillaTagger.Instance.headCollider.transform.position;
+        }
+
         public static void GhostMonkeH()
         {
             if(ControllerInputPoller.instance.leftControllerPrimaryButton)
@@ -239,49 +267,7 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.offlineVRRig.enabled = true;
             }
         }
-
-        // ПЕРШИЙ ВОЇД: Тільки Hold (тримаєш — зникаєш)
-        public static void InvisMonkeH()
-        {
-            if (ControllerInputPoller.instance.rightControllerPrimaryButton)
-            {
-                GorillaTagger.Instance.offlineVRRig.transform.position += Vector3.up * 9999f;
-            }
-            else
-            {
-                GorillaTagger.Instance.offlineVRRig.transform.position = GorillaTagger.Instance.headCollider.transform.position;
-            }
-        }
-
-        // ДРУГИЙ ВОЇД: Тільки Toggle (натиснув — зник, натиснув ще раз — з'явився)
-        private static bool invOn = false; // Стан невидимості
-        private static bool invPressed = false; // Для реєстрації одного натискання
-
-        public static void InvisMonkeT()
-        {
-            // Перевіряємо натискання правої основної кнопки (A або X залежно від контролера)
-            bool isDown = ControllerInputPoller.instance.rightControllerPrimaryButton;
-
-            // Логіка тугла: спрацьовує один раз при натисканні
-            if (isDown && !invPressed)
-            {
-                invOn = !invOn; // Змінюємо стан на протилежний
-
-                if (invOn)
-                {
-                    // Відправляємо ріг "вгору" (роблячи його невидимим для інших/себе)
-                    GorillaTagger.Instance.offlineVRRig.transform.position += Vector3.up * 9999f;
-                }
-                else
-                {
-                    // Повертаємо ріг на місце (хоча зазвичай позиція оновлюється сама)
-                    // У Gorilla Tag позиція ріга зазвичай прив'язана до камери
-                    GorillaTagger.Instance.offlineVRRig.transform.position = GorillaTagger.Instance.headCollider.transform.position;
-                }
-            }
-            invPressed = isDown; // Запам'ятовуємо стан кнопки
-        }
-
+      
         public static void WASDFly()
         {
             if (UnityInput.Current.GetKey(KeyCode.W))
@@ -329,7 +315,7 @@ namespace StupidTemplate.Mods
             {
                 foreach (MeshCollider collider in colliders)
                 {
-                    collider.enabled = false;
+                    collider.enabled = true;
                 }
             }
         }
@@ -361,7 +347,7 @@ namespace StupidTemplate.Mods
             if (ControllerInputPoller.instance.rightGrab)
             {
                 GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
-                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.forward;
+                GorillaTagger.Instance.rigidbody.linearVelocity += Vector3.forward;
             }
         }
     }
