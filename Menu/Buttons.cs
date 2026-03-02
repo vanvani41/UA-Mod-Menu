@@ -81,8 +81,8 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XT </color><color=gray>]</color>", method =() => Movement.GhostMonkeT(), toolTip = "Freezes you when pressing X."},
                 new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AH </color><color=gray>]</color>", method =() => Movement.InvisMonkeH(), toolTip = "Making you invisible when holding A."},
                 new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AT </color><color=gray>]</color>", method =() => Movement.InvisMonkeT(), toolTip = "Making you invisible when pressing A."},
-                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModR(), toolTip = "Pulls you when holding right grip."},
-                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModL(), toolTip = "Pulls you when holding left grip."},
+                //new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModGR(), toolTip = "Pulls you when holding right grip."},
+                //new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModGL(), toolTip = "Pulls you when holding left grip."},
             },
 
             new ButtonInfo[] { // Safety Mods [6]

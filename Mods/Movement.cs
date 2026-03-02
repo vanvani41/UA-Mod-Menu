@@ -111,8 +111,8 @@ namespace StupidTemplate.Mods
             {
                 if (platsgl == null)
                 {
-                    platsgl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgl.transform.localScale = new Vector3(1f, 0.3f, 0.4f);
+                    platsgl = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    platsgl.transform.localScale = new Vector3(2f, 0.3f, 0.4f);
                     platsgl.transform.position = TrueLeftHand().position;
                     platsgl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders(platsgl);
@@ -128,8 +128,8 @@ namespace StupidTemplate.Mods
             {
                 if (platsgr == null)
                 {
-                    platsgr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgr.transform.localScale = new Vector3(1f, 0.3f, 0.4f);
+                    platsgr = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    platsgr.transform.localScale = new Vector3(2f, 0.3f, 0.4f);
                     platsgr.transform.position = TrueRightHand().position;
                     platsgr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders(platsgr);
@@ -151,8 +151,8 @@ namespace StupidTemplate.Mods
             {
                 if (platstl == null)
                 {
-                    platstl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstl.transform.localScale = new Vector3(1f, 0.3f, 0.4f);
+                    platstl = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    platstl.transform.localScale = new Vector3(2f, 0.3f, 0.4f);
                     platstl.transform.position = TrueLeftHand().position;
                     platstl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders(platstl);
@@ -168,8 +168,8 @@ namespace StupidTemplate.Mods
             {
                 if (platstr == null)
                 {
-                    platstr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstr.transform.localScale = new Vector3(1f, 0.3f, 0.4f);
+                    platstr = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    platstr.transform.localScale = new Vector3(2f, 0.3f, 0.4f);
                     platstr.transform.position = TrueRightHand().position;
                     platstr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders(platstr);
@@ -230,7 +230,7 @@ namespace StupidTemplate.Mods
         }
         public static void GhostMonkeH()
         {
-            if(ControllerInputPoller.instance.rightControllerPrimaryButton)
+            if(ControllerInputPoller.instance.leftControllerPrimaryButton)
             {
                 GorillaTagger.Instance.offlineVRRig.enabled = false;
             }
@@ -245,11 +245,11 @@ namespace StupidTemplate.Mods
         {
             if (ControllerInputPoller.instance.rightControllerPrimaryButton)
             {
-                GorillaTagger.Instance.offlineVRRig.transform.up = Vector3.up * 9999999f;
+                GorillaTagger.Instance.offlineVRRig.transform.position += Vector3.up * 9999f;
             }
             else
             {
-                GorillaTagger.Instance.offlineVRRig.transform.up = Vector3.up;
+                GorillaTagger.Instance.offlineVRRig.transform.position = GorillaTagger.Instance.headCollider.transform.position;
             }
         }
 
@@ -317,9 +317,8 @@ namespace StupidTemplate.Mods
         }
         public static void NoclipRT()
         {
-            bool isTriggerPressed = ControllerInputPoller.instance.rightControllerTriggerButton;
             MeshCollider[] colliders = Resources.FindObjectsOfTypeAll<MeshCollider>();
-            if (isTriggerPressed)
+            if (ControllerInputPoller.instance.rightControllerTriggerButton)
             {
                 foreach (MeshCollider collider in colliders)
                 {
@@ -336,9 +335,8 @@ namespace StupidTemplate.Mods
         }
         public static void NoclipLT()
         {
-            bool isTriggerPressed = ControllerInputPoller.instance.leftControllerTriggerButton;
             MeshCollider[] colliders = Resources.FindObjectsOfTypeAll<MeshCollider>();
-            if (isTriggerPressed)
+            if (ControllerInputPoller.instance.leftControllerTriggerButton)
             {
                 foreach (MeshCollider collider in colliders)
                 {
@@ -366,130 +364,5 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.forward;
             }
         }
-
-        public static void PullModR()
-        {
-            if (ControllerInputPoller.instance.rightGrab)
-            {
-                RaycastHit hit;
-                // Юзаємо те, що реально є в GTPlayer — посилання на руку
-                Transform hand = GTPlayer.Instance.GetControllerTransform(true);
-
-                if (Physics.Raycast(hand.position, hand.forward, out hit, 100f, GTPlayer.Instance.locomotionEnabledLayers))
-                {
-                    Vector3 direction = (hit.point - hand.position).normalized;
-                    float distance = Vector3.Distance(hit.point, hand.position);
-                    if (distance > 1.5f)
-                    {
-                        // Використовуємо linearVelocity, як ти і казав
-                        GTPlayer.Instance.bodyCollider.attachedRigidbody.linearVelocity = direction * Settings.Movement.PullSpeed;
-                    }
-                }
-            }
-        }
-        public static void PullModL()
-        {
-            if (ControllerInputPoller.instance.leftGrab)
-            {
-                RaycastHit hit;
-                // Юзаємо те, що реально є в GTPlayer — посилання на руку
-                Transform hand = GTPlayer.Instance.GetControllerTransform(true);
-
-                if (Physics.Raycast(hand.position, hand.forward, out hit, 100f, GTPlayer.Instance.locomotionEnabledLayers))
-                {
-                    Vector3 direction = (hit.point - hand.position).normalized;
-                    float distance = Vector3.Distance(hit.point, hand.position);
-                    if (distance > 1.5f)
-                    {
-                        // Використовуємо linearVelocity, як ти і казав
-                        GTPlayer.Instance.bodyCollider.attachedRigidbody.linearVelocity = direction * Settings.Movement.PullSpeed;
-                    }
-                }
-            }
-        }
-
-        // I TOOK FROM II STUPID MENU FROM HERE 
-        public static float pullPower = 0.05f;
-        public static readonly Dictionary<bool, bool> previousTouchingGround = new Dictionary<bool, bool>();
-        public static bool scaleWithPlayer = true;
-
-        public static void ProcessPullHandGL(bool left)
-        {
-            // Виправлено: тернарний оператор замінено на звичайну логіку
-            // Якщо рука не стискає хват — виходимо
-            if (left ? !ControllerInputPoller.instance.leftGrab : !ControllerInputPoller.instance.rightGrab)
-                return;
-
-            bool touchingGround = GTPlayer.Instance.IsHandTouching(left);
-            previousTouchingGround.TryGetValue(left, out bool wasTouchingGround);
-
-            if (!touchingGround && wasTouchingGround)
-            {
-                Vector3 normal = GTPlayer.Instance.lastHitInfoHand.normal;
-                Vector3 direction = GorillaTagger.Instance.rigidbody.linearVelocity.X_Z();
-                GTPlayer.Instance.transform.position += (direction - normal * Vector3.Dot(direction, normal)).normalized * (direction.magnitude / GTPlayer.Instance.maxJumpSpeed * (pullPower * 5f)) * (scaleWithPlayer ? GTPlayer.Instance.scale : 1f);
-            }
-
-            previousTouchingGround[left] = touchingGround;
-        }
-
-        public static void ProcessPullHandGR(bool right)
-        {
-            // Виправлено: використовуємо right для перевірки
-            if (right ? !ControllerInputPoller.instance.rightGrab : !ControllerInputPoller.instance.leftGrab)
-                return;
-
-            // Виправлено: замінено left на right у всіх параметрах
-            bool touchingGround = GTPlayer.Instance.IsHandTouching(right);
-            previousTouchingGround.TryGetValue(right, out bool wasTouchingGround);
-
-            if (!touchingGround && wasTouchingGround)
-            {
-                Vector3 normal = GTPlayer.Instance.lastHitInfoHand.normal;
-                Vector3 direction = GorillaTagger.Instance.rigidbody.linearVelocity.X_Z();
-                GTPlayer.Instance.transform.position += (direction - normal * Vector3.Dot(direction, normal)).normalized * (direction.magnitude / GTPlayer.Instance.maxJumpSpeed * (pullPower * 5f)) * (scaleWithPlayer ? GTPlayer.Instance.scale : 1f);
-            }
-
-            previousTouchingGround[right] = touchingGround;
-        }
-
-        public static void PullModGL()
-        {
-            ProcessPullHandGL(false);
-            ProcessPullHandGL(true);
-        }
-        public static void PullModGR()
-        {
-            ProcessPullHandGR(false);
-            ProcessPullHandGR(true);
-        }
-        public static void UpdateClipColliders(bool enabled)
-        {
-            foreach (MeshCollider v in Resources.FindObjectsOfTypeAll<MeshCollider>())
-                v.enabled = enabled;
-        }
-        public static bool noclip;
-        public static void NoclipFly()
-        {
-            if (ControllerInputPoller.instance.rightControllerPrimaryButton)
-            {
-                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * (Time.deltaTime * Settings.Movement.flySpeed);
-                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
-                if (!noclip)
-                {
-                    noclip = true;
-                    UpdateClipColliders(false);
-                }
-            }
-            else
-            {
-                if (noclip)
-                {
-                    noclip = false;
-                    UpdateClipColliders(true);
-                }
-            }
-        }
-        // TO HERE
     }
 }
