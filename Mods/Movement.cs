@@ -149,7 +149,7 @@ namespace StupidTemplate.Mods
                 if (platstl == null)
                 {
                     platstl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstl.transform.localScale = new Vector3(0.05f, 0.05f, 0.4f);
+                    platstl.transform.localScale = new Vector3(0.05f, 0.003f, 0.1f);
                     platstl.transform.position = TrueLeftHand().position;
                     platstl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders1(platstl);
@@ -342,7 +342,7 @@ namespace StupidTemplate.Mods
             if (ControllerInputPoller.instance.leftGrab)
             {
                 GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
-                GorillaTagger.Instance.rigidbody.linearVelocity -= Vector3.forward;
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.forward;
             }
             if (ControllerInputPoller.instance.rightGrab)
             {
@@ -355,12 +355,28 @@ namespace StupidTemplate.Mods
             if (ControllerInputPoller.instance.leftControllerTriggerButton)
             {
                 GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
-                GorillaTagger.Instance.rigidbody.linearVelocity -= Vector3.forward;
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.forward;
             }
             if (ControllerInputPoller.instance.rightControllerTriggerButton)
             {
                 GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.forward;
+            }
+        }
+        public static void SpiderMonkeRWRG()
+        {
+            if (ControllerInputPoller.instance.rightGrab)
+            {
+                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
+                GorillaTagger.Instance.rigidbody.linearVelocity -= Vector3.forward;
+            }
+        }
+        public static void SpiderMonkeRWRT()
+        {
+            if (ControllerInputPoller.instance.rightControllerTriggerButton)
+            {
+                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
+                GorillaTagger.Instance.rigidbody.linearVelocity -= Vector3.forward;
             }
         }
         public static void SpiderMonkeLWLT()
