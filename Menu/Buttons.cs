@@ -12,18 +12,19 @@ namespace StupidTemplate.Menu
             new ButtonInfo[] { // Main Mods [0]
                 new ButtonInfo { buttonText = "Settings", method =() => currentCategory = 1, isTogglable = false, toolTip = "Opens the main settings page for the menu."},
 
-                new ButtonInfo { buttonText = "Room Mods", method =() => currentCategory = 4, isTogglable = false, toolTip = "Opens the room mods tab."},
-                new ButtonInfo { buttonText = "Movement Mods", method =() => currentCategory = 5, isTogglable = false, toolTip = "Opens the movement mods tab."},
-                new ButtonInfo { buttonText = "Safety Mods", method =() => currentCategory = 6, isTogglable = false, toolTip = "Opens the safety mods tab."},
-                new ButtonInfo { buttonText = "Fun/Challenge Mods", method =() => currentCategory = 7, isTogglable = false, toolTip = "Opens the Fun/Challenge mods tab."},
-                new ButtonInfo { buttonText = "Nametags Mods", method =() => currentCategory = 8, isTogglable = false, toolTip = "Opens the Nametags mods tab."},
+                new ButtonInfo { buttonText = "Room Mods", method =() => currentCategory = 5, isTogglable = false, toolTip = "Opens the room mods tab."},
+                new ButtonInfo { buttonText = "Movement Mods", method =() => currentCategory = 6, isTogglable = false, toolTip = "Opens the movement mods tab."},
+                new ButtonInfo { buttonText = "Safety Mods", method =() => currentCategory = 7, isTogglable = false, toolTip = "Opens the safety mods tab."},
+                new ButtonInfo { buttonText = "Fun/Challenge Mods", method =() => currentCategory = 8, isTogglable = false, toolTip = "Opens the Fun/Challenge mods tab."},
+                new ButtonInfo { buttonText = "Nametags Mods", method =() => currentCategory = 9, isTogglable = false, toolTip = "Opens the Nametags mods tab."},
             },
 
             new ButtonInfo[] { // Settings [1]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
-                new ButtonInfo { buttonText = "Menu", method =() => currentCategory = 2, isTogglable = false, toolTip = "Opens the settings for the menu."},
-                new ButtonInfo { buttonText = "Movement", method =() => currentCategory = 3, isTogglable = false, toolTip = "Opens the movement settings for the menu."},
+                new ButtonInfo { buttonText = "Menu Settings", method =() => currentCategory = 2, isTogglable = false, toolTip = "Opens the settings for the menu."},
+                new ButtonInfo { buttonText = "Movement Settings", method =() => currentCategory = 3, isTogglable = false, toolTip = "Opens the movement settings for the menu."},
+                new ButtonInfo { buttonText = "Nametags Settings", method =() => currentCategory = 4, isTogglable = false, toolTip = "Opens the nametags settings for the menu."},
             },
 
             new ButtonInfo[] { // Menu Settings [2]
@@ -45,7 +46,12 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Change Pull Speed", overlapText = "Change Pull Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangePullSpeed(), isTogglable = false, toolTip = "Changes the speed of the pull mod."},
             },
 
-            new ButtonInfo[] { // Room Mods [4]
+            new ButtonInfo[] { // Nametags Settings [4]
+                new ButtonInfo { buttonText = "Return to Settings", method =() => currentCategory = 1, isTogglable = false, toolTip = "Returns to the main settings page for the menu."},
+
+                new ButtonInfo { buttonText = "Change Name Nametags Size", overlapText = "Change Name Nametags Size <color=gray>[</color><color=green>Medium</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeFlySpeed(), isTogglable = false, toolTip = "Changes the size of the name nametags mod."},            },
+
+            new ButtonInfo[] { // Room Mods [5]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
                 new ButtonInfo { buttonText = "Disconnect", method =() => Room.Disconnect(), isTogglable = false, toolTip = "Disconnects you from the room."},
@@ -62,7 +68,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Connect to Room <color=gray>[</color><color=green> ECHO </color><color=gray>]</color>", method =() => Room.JoinRoomECHO(), isTogglable = false, toolTip = "Connects you to the room ECHO."},
             },
 
-            new ButtonInfo[] { // Movement Mods [5]
+            new ButtonInfo[] { // Movement Mods [6]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
                 new ButtonInfo { buttonText = "Platforms <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.GripPlatforms(), toolTip = "Spawns platforms on your hands when pressing grip."},
@@ -84,11 +90,13 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AT </color><color=gray>]</color>", method =() => Movement.InvisMonkeT(), toolTip = "Making you invisible when pressing A."},
                 new ButtonInfo { buttonText = "Spider Monke <color=gray>[</color><color=green> LWLT </color><color=gray>]</color>", method =() => Movement.SpiderMonkeLWLT(), toolTip = "Making you like a spider on left wall when holding left trigger."},
                 new ButtonInfo { buttonText = "Spider Monke <color=gray>[</color><color=green> LWLG </color><color=gray>]</color>", method =() => Movement.SpiderMonkeLWLG(), toolTip = "Making you like a spider on left wall when holding left grip."},
-                //new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModLG(), toolTip = "Pulls you when holding right grip."},
-                //new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModRG(), toolTip = "Pulls you when holding left grip."},
+                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModLG(), toolTip = "Pulls you when holding right grip."},
+                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModRG(), toolTip = "Pulls you when holding left grip."},
+                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RT </color><color=gray>]</color>", method =() => Movement.PullModLT(), toolTip = "Pulls you when holding right trigger."},
+                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LT </color><color=gray>]</color>", method =() => Movement.PullModRT(), toolTip = "Pulls you when holding left trigger."},
             },
 
-            new ButtonInfo[] { // Safety Mods [6]
+            new ButtonInfo[] { // Safety Mods [7]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
                 new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=green> Disconnect </color><color=gray>]</color>", method =() => Safety.AntiReportDisconnect(), toolTip = "Disconnects you when someone tries to report you."},
@@ -97,7 +105,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Restart Gorilla Tag", method =() => Safety.RestartGorillaTag(), isTogglable = false},
             },
 
-            new ButtonInfo[] { // Fun/Challenge Mods [7]
+            new ButtonInfo[] { // Fun/Challenge Mods [8]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
                 
                 new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=orange> Close Gorilla Tag </color><color=gray>]</color>", method =() => FunChallenge.AntiReportCloseGorillaTag(), toolTip = "Closes Gorilla Tag when someone tries to report you."},
@@ -108,7 +116,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "<color=red>RESTART PC</color>", method =() => FunChallenge.RESTARTPC(), isTogglable = false},
             },
 
-            new ButtonInfo[] { // Nametags Mods [8]
+            new ButtonInfo[] { // Nametags Mods [9]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
                 new ButtonInfo { buttonText = "Name Nametags", method =() => Nametags.nameTags = !Nametags.nameTags, toolTip = "Turns on Name Nametag."},

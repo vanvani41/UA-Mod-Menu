@@ -379,5 +379,105 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.rigidbody.linearVelocity += Vector3.forward;
             }
         }
+        // Ти сам встановлюєш ці рефи десь у Start/Awake
+        public static Rigidbody playerBody;
+        public static Transform rightHand;
+
+        public static LayerMask groundMask;
+
+        public static float pullStrength = 1.0f;
+        public static float maxStep = 0.08f;
+        public static float groundRadius = 0.04f;
+
+        private static Vector3 prevRightHandPos;
+        private static bool inited;
+        public static Transform leftHand;
+        private static Vector3 prevLeftHandPos;
+
+        public static void PullModR(bool triggerHeld)
+        {
+            if (!inited)
+            {
+                if (leftHand != null) prevRightHandPos = leftHand.position;
+                inited = true;
+            }
+
+            if (playerBody == null || leftHand == null) return;
+
+            if (triggerHeld)
+            {
+                // тут код (актив)
+                Vector3 delta = leftHand.position - prevRightHandPos;
+
+                bool touchingGround = Physics.CheckSphere(leftHand.position, groundRadius, groundMask, QueryTriggerInteraction.Ignore);
+
+                if (touchingGround)
+                {
+                    Vector3 desired = (-delta) * pullStrength;
+
+                    if (desired.magnitude > maxStep)
+                        desired = desired.normalized * maxStep;
+
+                    playerBody.MovePosition(playerBody.position + desired);
+                }
+            }
+            else
+            {
+                // тут код (неактив) — просто ресет, щоб не було ривка
+                prevLeftHandPos = leftHand.position;
+            }
+
+            prevLeftHandPos = leftHand.position;
+        }
+        public static void PullModL(bool triggerHeld)
+        {
+            if (!inited)
+            {
+                if (rightHand != null) prevLeftHandPos = rightHand.position;
+                inited = true;
+            }
+
+            if (playerBody == null || rightHand == null) return;
+
+            if (triggerHeld)
+            {
+                // тут код (актив)
+                Vector3 delta = rightHand.position - prevLeftHandPos;
+
+                bool touchingGround = Physics.CheckSphere(rightHand.position, groundRadius, groundMask, QueryTriggerInteraction.Ignore);
+
+                if (touchingGround)
+                {
+                    Vector3 desired = (-delta) * pullStrength;
+
+                    if (desired.magnitude > maxStep)
+                        desired = desired.normalized * maxStep;
+
+                    playerBody.MovePosition(playerBody.position + desired);
+                }
+            }
+            else
+            {
+                prevRightHandPos = rightHand.position;
+            }
+
+            prevLeftHandPos = rightHand.position;
+        }
+        public static void PullModRG()
+        {
+            PullModR(ControllerInputPoller.instance.rightGrab);
+        }
+        public static void PullModRT()
+        {
+            PullModR(ControllerInputPoller.instance.rightControllerTriggerButton);
+        }
+        public static void PullModLG()
+        {
+            PullModR(ControllerInputPoller.instance.leftGrab);
+        }
+        public static void PullModLT()
+        {
+            PullModR(ControllerInputPoller.instance.leftControllerTriggerButton);
+        }
     }
 }
