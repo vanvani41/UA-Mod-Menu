@@ -11,6 +11,10 @@ namespace StupidTemplate
 
         public void OnPlayerSpawned() =>
             Patches.PatchHandler.PatchAll();
+        void Update()
+        {
+            Mods.Nametags.RunNametags();
+        }
     }
 }
 

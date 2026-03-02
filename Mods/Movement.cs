@@ -109,7 +109,7 @@ namespace StupidTemplate.Mods
                 if (platsgl == null)
                 {
                     platsgl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgl.transform.localScale = new Vector3(0.25f, 0.3f, 0.4f);
+                    platsgl.transform.localScale = new Vector3(0.05f, 0.05f, 0.4f);
                     platsgl.transform.position = TrueLeftHand().position;
                     platsgl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders1(platsgl);
@@ -126,7 +126,7 @@ namespace StupidTemplate.Mods
                 if (platsgr == null)
                 {
                     platsgr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgr.transform.localScale = new Vector3(0.25f, 0.3f, 0.4f);
+                    platsgr.transform.localScale = new Vector3(0.05f, 0.05f, 0.4f);
                     platsgr.transform.position = TrueRightHand().position;
                     platsgr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders1(platsgr);
@@ -149,7 +149,7 @@ namespace StupidTemplate.Mods
                 if (platstl == null)
                 {
                     platstl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstl.transform.localScale = new Vector3(0.25f, 0.3f, 0.4f);
+                    platstl.transform.localScale = new Vector3(0.05f, 0.05f, 0.4f);
                     platstl.transform.position = TrueLeftHand().position;
                     platstl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders1(platstl);
@@ -166,7 +166,7 @@ namespace StupidTemplate.Mods
                 if (platstr == null)
                 {
                     platstr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstr.transform.localScale = new Vector3(0.25f, 0.3f, 0.4f);
+                    platstr.transform.localScale = new Vector3(0.05f, 0.05f, 0.4f);
                     platstr.transform.position = TrueRightHand().position;
                     platstr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders1(platstr);
@@ -337,7 +337,7 @@ namespace StupidTemplate.Mods
                 }
             }
         }
-        public static void CarMonke()
+        public static void CarMonkeG()
         {
             if (ControllerInputPoller.instance.leftGrab)
             {
@@ -347,6 +347,35 @@ namespace StupidTemplate.Mods
             if (ControllerInputPoller.instance.rightGrab)
             {
                 GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.forward;
+            }
+        }
+        public static void CarMonkeT()
+        {
+            if (ControllerInputPoller.instance.leftControllerTriggerButton)
+            {
+                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
+                GorillaTagger.Instance.rigidbody.linearVelocity -= Vector3.forward;
+            }
+            if (ControllerInputPoller.instance.rightControllerTriggerButton)
+            {
+                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.CarMonkeSpeed;
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.forward;
+            }
+        }
+        public static void SpiderMonkeLWLT()
+        {
+            if (ControllerInputPoller.instance.leftControllerTriggerButton)
+            {
+                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * 10f;
+                GorillaTagger.Instance.rigidbody.linearVelocity += Vector3.forward;
+            }
+        }
+        public static void SpiderMonkeLWLG()
+        {
+            if (ControllerInputPoller.instance.leftGrab)
+            {
+                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * 10f;
                 GorillaTagger.Instance.rigidbody.linearVelocity += Vector3.forward;
             }
         }

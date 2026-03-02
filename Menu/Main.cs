@@ -189,9 +189,9 @@ namespace StupidTemplate.Menu
             versioncomponent.localPosition = new Vector3(
                 -0.04f,  
                 0f,  
-                -0.001f    
+                -0.0001f    
             );
-            versioncomponent.rotation = Quaternion.Euler(180f, 90f, 90f);
+            versioncomponent.rotation = Quaternion.Euler(0f, 90f, 90f);
 
             text.font = currentFont;
             text.text = PluginInfo.Name + " <color=grey>[</color><color=white>" +

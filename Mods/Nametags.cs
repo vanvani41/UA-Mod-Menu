@@ -6,7 +6,7 @@ namespace StupidTemplate.Mods
 {
     public class Nametags : MonoBehaviour
     {
-        public static bool nameTags;
+        public static bool nameTags = true;
 
         public static void RunNametags()
         {
