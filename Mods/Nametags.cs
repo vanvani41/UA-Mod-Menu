@@ -7,6 +7,7 @@ namespace StupidTemplate.Mods
     public class Nametags : MonoBehaviour
     {
         public static bool nameTags = true;
+        public static bool idTags = false;
 
         public static void RunNametags()
         {
@@ -42,6 +43,13 @@ namespace StupidTemplate.Mods
                 TMP_Text tmp = rig.playerText1;
                 if (tmp == null) return;
 
+                if (!nameTags && !idTags)
+                {
+                    tmp.text = "";
+                    tmp.transform.localPosition = new Vector3(0f, 0f, 0f); // постав свої координати
+                    return;
+                }
+
                 string nameColor =
                     rig.mainSkin != null &&
                     rig.mainSkin.material != null &&
@@ -59,6 +67,7 @@ namespace StupidTemplate.Mods
 
                 string prefix = "";
                 string suffix = "";
+                string uppix = "";
 
                 if (rig.Creator != null)
                 {
@@ -72,7 +81,11 @@ namespace StupidTemplate.Mods
                     }*/
                 }
 
-                tmp.text = $"{prefix} <color=#{nameColor}>{nick}</color> {suffix}";
+
+                if (idTags && rig.Creator != null)
+                    uppix = $"<color=grey><size=0.8>{rig.Creator.UserId}</size></color>\n";
+
+                tmp.text = $"{uppix}{prefix}<color=#{nameColor}>{nick}</color>{suffix}";
                 tmp.alignment = TextAlignmentOptions.Center;
                 tmp.fontSize = 1.2f;
                 tmp.transform.localScale = Vector3.one;
