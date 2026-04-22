@@ -89,16 +89,6 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XT </color><color=gray>]</color>", method =() => Movement.GhostMonkeT(), toolTip = "Freezes you when pressing X."},
                 new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AH </color><color=gray>]</color>", method =() => Movement.InvisMonkeH(), toolTip = "Making you invisible when holding A."},
                 new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AT </color><color=gray>]</color>", method =() => Movement.InvisMonkeT(), toolTip = "Making you invisible when pressing A."},
-                /*
-                new ButtonInfo { buttonText = "Spider Monke <color=gray>[</color><color=green> LWLT </color><color=gray>]</color>", method =() => Movement.SpiderMonkeLWLT(), toolTip = "Making you like a spider on left wall when holding left trigger."},
-                new ButtonInfo { buttonText = "Spider Monke <color=gray>[</color><color=green> LWLG </color><color=gray>]</color>", method =() => Movement.SpiderMonkeLWLG(), toolTip = "Making you like a spider on left wall when holding left grip."},
-                new ButtonInfo { buttonText = "Spider Monke <color=gray>[</color><color=green> RWRT </color><color=gray>]</color>", method =() => Movement.SpiderMonkeRWRT(), toolTip = "Making you like a spider on right wall when holding right trigger."},
-                new ButtonInfo { buttonText = "Spider Monke <color=gray>[</color><color=green> RWRG </color><color=gray>]</color>", method =() => Movement.SpiderMonkeRWRG(), toolTip = "Making you like a spider on right wall when holding right grip."},
-                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RG </color><color=gray>]</color>", method =() => Movement.PullModLG(), toolTip = "Pulls you when holding right grip."},
-                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LG </color><color=gray>]</color>", method =() => Movement.PullModRG(), toolTip = "Pulls you when holding left grip."},
-                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> RT </color><color=gray>]</color>", method =() => Movement.PullModLT(), toolTip = "Pulls you when holding right trigger."},
-                new ButtonInfo { buttonText = "Pull Mod <color=gray>[</color><color=green> LT </color><color=gray>]</color>", method =() => Movement.PullModRT(), toolTip = "Pulls you when holding left trigger."},
-                */
             },
 
             new ButtonInfo[] { // Safety Mods [7]
@@ -131,7 +121,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
                 new ButtonInfo { buttonText = "Are you a master client?", method =() => Master.CheckIsMaster(), isTogglable = false},
-                new ButtonInfo { buttonText = "Kick Gun", method =() => Master.KickGun(), toolTip = "Kicks players by shooting them with a raycast when pressing right trigger."},
+                new ButtonInfo { buttonText = "Kick Gun", method =() => Master.KickGun(), toolTip = null},
             },
         };
     }
