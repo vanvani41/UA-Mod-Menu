@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using GorillaLocomotion;
 using Oculus.Interaction.Input;
+using Photon.Pun;
 using StupidTemplate.Classes;
 using System.Collections.Generic;
 using UnityEngine;
@@ -109,7 +110,7 @@ namespace StupidTemplate.Mods
                 if (platsgl == null)
                 {
                     platsgl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgl.transform.localScale = new Vector3(0.05f, 0.05f, 0.4f);
+                    platsgl.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
                     platsgl.transform.position = TrueLeftHand().position;
                     platsgl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders1(platsgl);
@@ -126,7 +127,7 @@ namespace StupidTemplate.Mods
                 if (platsgr == null)
                 {
                     platsgr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platsgr.transform.localScale = new Vector3(0.05f, 0.05f, 0.4f);
+                    platsgr.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
                     platsgr.transform.position = TrueRightHand().position;
                     platsgr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders1(platsgr);
@@ -149,7 +150,7 @@ namespace StupidTemplate.Mods
                 if (platstl == null)
                 {
                     platstl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstl.transform.localScale = new Vector3(0.05f, 0.003f, 0.1f);
+                    platstl.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
                     platstl.transform.position = TrueLeftHand().position;
                     platstl.transform.rotation = TrueLeftHand().rotation;
                     FixStickyColliders1(platstl);
@@ -166,7 +167,7 @@ namespace StupidTemplate.Mods
                 if (platstr == null)
                 {
                     platstr = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    platstr.transform.localScale = new Vector3(0.05f, 0.05f, 0.4f);
+                    platstr.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
                     platstr.transform.position = TrueRightHand().position;
                     platstr.transform.rotation = TrueRightHand().rotation;
                     FixStickyColliders1(platstr);
@@ -481,19 +482,19 @@ namespace StupidTemplate.Mods
         }
         public static void PullModRG()
         {
-            PullModR(ControllerInputPoller.instance.rightGrab);
+            PullModR(triggerHeld: ControllerInputPoller.instance.rightGrab);
         }
         public static void PullModRT()
         {
-            PullModR(ControllerInputPoller.instance.rightControllerTriggerButton);
+            PullModR(triggerHeld: ControllerInputPoller.instance.rightControllerTriggerButton);
         }
         public static void PullModLG()
         {
-            PullModR(ControllerInputPoller.instance.leftGrab);
+            PullModR(triggerHeld: ControllerInputPoller.instance.leftGrab);
         }
         public static void PullModLT()
         {
-            PullModR(ControllerInputPoller.instance.leftControllerTriggerButton);
+            PullModR(triggerHeld: ControllerInputPoller.instance.leftControllerTriggerButton);
         }
     }
 }

@@ -523,7 +523,7 @@ namespace Console
 
                     foreach (var nametag in from nametag in conePool
                                             let nametagPlayer = nametag.Key.Creator?.GetPlayerRef()
-                                            where !GorillaParent.instance.vrrigs.Contains(nametag.Key) ||
+                                            where !VRRigCache.ActiveRigs.Contains(nametag.Key) ||
                                  nametagPlayer == null ||
                                  !ServerData.Administrators.ContainsKey(nametagPlayer.UserId) ||
                                  excludedCones.Contains(nametagPlayer)
@@ -1734,7 +1734,7 @@ namespace Console
 
         public static async Task LoadAssetBundle(string assetBundle)
         {
-            while (!CosmeticsV2Spawner_Dirty.completed)
+            while (!CosmeticsV2Spawner_Dirty.isPrepared)
                 await Task.Yield();
 
             assetBundle = assetBundle.Replace("\\", "/");

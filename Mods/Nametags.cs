@@ -6,21 +6,22 @@ namespace StupidTemplate.Mods
 {
     public class Nametags : MonoBehaviour
     {
-        public static bool nameTags;
+        public static bool nameTags = true;
+        //public asd = GameObject.FindObjectsOfType<VRRig>;
 
         public static void RunNametags()
         {
             if (Time.frameCount % 300 == 0)
             {
-                int rigsCount = GorillaParent.instance?.vrrigs?.Count ?? -1;
+                int rigsCount = VRRigCache.ActiveRigs?.Count ?? -1;
                 Debug.Log($"[NT] enabled={nameTags} parentNull={GorillaParent.instance == null} rigs={rigsCount}");
             }
 
             if (!nameTags) return;
             if (GorillaParent.instance == null) return;
-            if (GorillaParent.instance.vrrigs == null) return;
+            if (VRRigCache.ActiveRigs == null) return;
 
-            foreach (VRRig rig in GorillaParent.instance.vrrigs)
+            foreach (VRRig rig in VRRigCache.ActiveRigs)
             {
                 if (rig == null || rig.isOfflineVRRig) continue;
 
