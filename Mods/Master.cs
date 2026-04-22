@@ -1,16 +1,7 @@
-﻿using BepInEx;
-using GorillaLocomotion;
-using GorillaTag.GuidedRefs;
-using Oculus.Interaction.Input;
-using Photon.Pun;
-using StupidTemplate.Classes;
-using System.Collections.Generic;
-using System.Drawing;
-using Unity.Burst.Intrinsics;
+﻿using Photon.Pun;
 using UnityEngine;
 using UnityEngine.XR;
 using static StupidTemplate.Menu.Main;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 namespace StupidTemplate.Mods
 {
@@ -41,21 +32,26 @@ namespace StupidTemplate.Mods
                 {
                     if (Physics.Raycast(NewPointer.transform.position, NewPointer.transform.forward, out RaycastHit hit, 50f))
                     {
-                        Notifications.NotifiLib.SendNotification("<color=green>Hit: </color>" + hit.collider.gameObject.name);
-
                         VRRig rig = hit.collider.GetComponentInParent<VRRig>();
-                        if (rig != null)
+                        if (rig != null && !rig.isLocal && rig.Creator != null)
                         {
-                            Notifications.NotifiLib.SendNotification("<color=green>Found rig: </color>" + rig.Creator.UserId);
+                            if (PhotonNetwork.IsMasterClient)
+                            {
+                                foreach (var player in PhotonNetwork.PlayerList)
+                                {
+                                    if (player.UserId == rig.Creator.UserId)
+                                    {
+                                        PhotonNetwork.CloseConnection(player);
+                                        Notifications.NotifiLib.SendNotification("<color=green>Kicked: </color>" + rig.Creator.NickName);
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Notifications.NotifiLib.SendNotification("<color=red>Not master client!</color>");
+                            }
                         }
-                        else
-                        {
-                            Notifications.NotifiLib.SendNotification("<color=red>No VRRig found on: </color>" + hit.collider.gameObject.name);
-                        }
-                    }
-                    else
-                    {
-                        Notifications.NotifiLib.SendNotification("<color=red>Raycast missed!</color>");
                     }
                 }
 

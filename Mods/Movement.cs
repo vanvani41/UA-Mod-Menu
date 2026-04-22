@@ -271,34 +271,37 @@ namespace StupidTemplate.Mods
       
         public static void WASDFly()
         {
+            float baseSpeed = Settings.Movement.WASDSpeed;
+            float speed = baseSpeed + (UnityInput.Current.GetKey(KeyCode.LeftShift) ? 4f : 0f);
+
             if (UnityInput.Current.GetKey(KeyCode.W))
-            {
-                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.WASDSpeed;
+            { 
+                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * speed;
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
             }
             if (UnityInput.Current.GetKey(KeyCode.S))
             {
-                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.WASDSpeed;
+                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * speed;
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
             }
             if (UnityInput.Current.GetKey(KeyCode.D))
             {
-                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.right * Time.deltaTime * Settings.Movement.WASDSpeed;
+                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.right * Time.deltaTime * speed;
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
             }
             if (UnityInput.Current.GetKey(KeyCode.A))
             {
-                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.right * Time.deltaTime * Settings.Movement.WASDSpeed;
+                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.right * Time.deltaTime * speed;
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
             }
             if (UnityInput.Current.GetKey(KeyCode.Space))
             {
-                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.up * Time.deltaTime * Settings.Movement.WASDSpeed;
+                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.up * Time.deltaTime * speed;
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
             }
             if (UnityInput.Current.GetKey(KeyCode.LeftControl))
             {
-                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.up * Time.deltaTime * Settings.Movement.WASDSpeed;
+                GTPlayer.Instance.transform.position -= GorillaTagger.Instance.headCollider.transform.up * Time.deltaTime * speed;
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
             }
         }

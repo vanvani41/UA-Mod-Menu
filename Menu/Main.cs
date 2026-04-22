@@ -522,9 +522,11 @@ namespace StupidTemplate.Menu
                                     try { target.disableMethod.Invoke(); } catch { }
                             }
                         }
+                        else if (target.toolTip == null) 
+                            return;
                         else
                         {
-                            NotifiLib.SendNotification("<color=grey>[</color><color=green>ENABLE</color><color=grey>]</color> " + target.toolTip);
+                            NotifiLib.SendNotification("<color=grey>[</color><color=green>TOGGLE</color><color=grey>]</color> " + target.toolTip);
                             if (target.method != null)
                                 try { target.method.Invoke(); } catch { }
                         }
