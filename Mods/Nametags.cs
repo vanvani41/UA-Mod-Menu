@@ -7,7 +7,6 @@ namespace StupidTemplate.Mods
     public class Nametags : MonoBehaviour
     {
         public static bool nameTags = true;
-        //public asd = GameObject.FindObjectsOfType<VRRig>;
 
         public static void RunNametags()
         {
@@ -43,22 +42,38 @@ namespace StupidTemplate.Mods
                 TMP_Text tmp = rig.playerText1;
                 if (tmp == null) return;
 
-                string nameColor = 
+                string nameColor =
                     rig.mainSkin != null &&
                     rig.mainSkin.material != null &&
                     rig.mainSkin.material.name.Contains("fected")
                         ? "FF8000"
                         : ColorUtility.ToHtmlStringRGB(rig.playerColor);
 
+                if (nameColor == "000000")
+                    nameColor = "FFFFFF";
+
                 string nick = (rig.Creator != null && !string.IsNullOrEmpty(rig.Creator.NickName))
                     ? rig.Creator.NickName
                     : "PLAYER";
                 nick = Regex.Replace(nick, "<.*?>", string.Empty);
 
-                tmp.text = $"<color=#{nameColor}>{nick}</color>";
+                string prefix = "";
+                string suffix = "";
 
+                if (rig.Creator != null)
+                {
+                    if (rig.Creator.UserId == "ID")
+                    {
+                        prefix = "<color=gold>[OWNER]</color>";
+                    }
+                    /*if (rig.Creator.UserId == "ID")
+                    {
+                    prefix/suffix = "";
+                    }*/
+                }
+
+                tmp.text = $"{prefix} <color=#{nameColor}>{nick}</color> {suffix}";
                 tmp.alignment = TextAlignmentOptions.Center;
-
                 tmp.fontSize = 1.2f;
                 tmp.transform.localScale = Vector3.one;
                 tmp.transform.localPosition = new Vector3(0f, 0.8f, -0.02f);
