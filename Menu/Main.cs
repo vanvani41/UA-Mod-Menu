@@ -2,6 +2,7 @@ using BepInEx;
 using GorillaLocomotion;
 using HarmonyLib;
 using StupidTemplate.Classes;
+using StupidTemplate.Mods;
 using StupidTemplate.Notifications;
 using System;
 using System.Collections.Generic;
@@ -522,8 +523,8 @@ namespace StupidTemplate.Menu
                                     try { target.disableMethod.Invoke(); } catch { }
                             }
                         }
-                        else if (target.toolTip == null) 
-                            return;
+                        else if (target.toolTip == "for master client")
+                            Master.CheckIsMaster();
                         else
                         {
                             NotifiLib.SendNotification("<color=grey>[</color><color=green>TOGGLE</color><color=grey>]</color> " + target.toolTip);

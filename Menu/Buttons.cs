@@ -114,14 +114,14 @@ namespace StupidTemplate.Menu
             new ButtonInfo[] { // Nametags Mods [9]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
-                new ButtonInfo { buttonText = "Name Nametags", method =() => Nametags.nameTags = !Nametags.nameTags, toolTip = "Turns on Name Nametag."},
+                new ButtonInfo { buttonText = "Name Nametags", method =() => Nametags.nameTags = !Nametags.nameTags, enabled = true, toolTip = "Turns on Name Nametag."},
                 new ButtonInfo { buttonText = "ID Nametags", method =() => Nametags.idTags = !Nametags.idTags, toolTip = "Turns on ID Nametag."},
             },
 
             new ButtonInfo[] { // Nametags Mods [10]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
-                new ButtonInfo { buttonText = "Are you a master client?", method =() => Master.CheckIsMaster(), isTogglable = false, toolTip = null},
+                new ButtonInfo { buttonText = "Are you a master client?", isTogglable = false, toolTip = "for master client"},
                 new ButtonInfo { buttonText = "Kick Gun", method =() => Master.KickGun(), toolTip = "Kicks whoever you want to, by a gun."},
             },
         };

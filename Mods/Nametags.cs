@@ -11,26 +11,14 @@ namespace StupidTemplate.Mods
 
         public static void RunNametags()
         {
-            if (Time.frameCount % 300 == 0)
-            {
-                int rigsCount = VRRigCache.ActiveRigs?.Count ?? -1;
-                Debug.Log($"[NT] enabled={nameTags} parentNull={GorillaParent.instance == null} rigs={rigsCount}");
-            }
-
-            if (!nameTags) return;
+            if (!nameTags && !idTags) return;
             if (GorillaParent.instance == null) return;
             if (VRRigCache.ActiveRigs == null) return;
 
             foreach (VRRig rig in VRRigCache.ActiveRigs)
             {
                 if (rig == null || rig.isOfflineVRRig) continue;
-
-                if (rig.playerText1 == null)
-                {
-                    if (Time.frameCount % 300 == 0)
-                        Debug.Log($"[NT] {rig.name}: playerText1 NULL");
-                    continue;
-                }
+                if (rig.playerText1 == null) continue;
 
                 UpdateNameOnly(rig);
             }
@@ -71,9 +59,13 @@ namespace StupidTemplate.Mods
 
                 if (rig.Creator != null)
                 {
-                    if (rig.Creator.UserId == "ID")
+                    if (rig.Creator.UserId == "C686727BCD7F2D8E")
                     {
-                        prefix = "<color=gold>[OWNER]</color>";
+                        prefix = "<color=gold>[OWNER]</color> (Steam)";
+                    }
+                    if (rig.Creator.UserId == "8F406DB4A6CC20B0")
+                    {
+                        prefix = "<color=gold>[OWNER]</color> (Quest)";
                     }
                     /*if (rig.Creator.UserId == "ID")
                     {

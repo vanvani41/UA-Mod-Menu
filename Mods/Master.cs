@@ -11,11 +11,11 @@ namespace StupidTemplate.Mods
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                Notifications.NotifiLib.SendNotification("<color=grey>[</color><color=purple>MASTER</color><color=grey>]</color> You are the master client.");
+                Notifications.NotifiLib.SendNotification("<color=grey>[</color><color=purple>MASTER CLIENT</color><color=grey>]</color> You are the master client.");
             }
             else
             {
-                Notifications.NotifiLib.SendNotification("<color=grey>[</color><color=purple>MASTER</color><color=grey>]</color> You are not the master client.");
+                Notifications.NotifiLib.SendNotification("<color=grey>[</color><color=purple>MASTER CLIENT</color><color=grey>]</color> You are not the master client.");
             }
         }
 
