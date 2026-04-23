@@ -1,4 +1,5 @@
-	<details><summary><b>English</b></summary>
+	<details>
+	<summary><b>English</b></summary>
 UA Mod Menu is a **first ukrainian** mod menu for Gorilla Tag, made by me, [**vanvani41**](https://github.com/vanvani41). Right now there's no ukrainian language in the menu, but in the future, i think i will add it. Also, i used [iis Stupid Template](https://github.com/iiDk-the-actual/iis.Stupid.Template) and Claude Sonnet 4.5 Adaptive for fixes and some kind of mods to make UA Mod Menu.
 	<details><summary><b>Why menu is open-source?</b></summary>
 	I want to help other guys to create a mod menu too! I want to share the code of UA Mod Menu, so you can learn how to create their **own** mod menu too.
@@ -23,7 +24,7 @@ UA Mod Menu is a **first ukrainian** mod menu for Gorilla Tag, made by me, [**va
 		</details>
 
 		<details><summary><b>Українська</b></summary>
-UA Mod Menu - це **найперший український** мод меню для Gorilla Tag, зроблений мною, [**vanvani41**](https://github.com/vanvani41). На данний момент у меню немає української мови, але в майбутньому я думаю я додам її. Також, я використовував [iis Stupid Template](https://github.com/iiDk-the-actual/iis.Stupid.Template) та Claude Sonnet 4.5 Adaptice для фіксів та деяких модів щоб зробити UA Мод Меню.
+UA Mod Menu - це **найперший український** мод меню для Gorilla Tag, зроблений мною, [**vanvani41**](https://github.com/vanvani41). На данний момент у меню немає української мови, але в майбутньому я думаю я додам її. Також, я використовував [iis Stupid Template](https://github.com/iiDk-the-actual/iis.Stupid.Template) та Claude Sonnet 4.5 Adaptive для фіксів та деяких модів щоб зробити UA Мод Меню.
 
 		<details><summary><b>Чому джерело меню відкрите?</b></summary>
 Я хочу допомогти іншим теж зробити мод меню! Я хочу поділитися кодом UA Mod Menu для усіх, щоб ви теж могли навчитися створювати **своє власне** мод меню.

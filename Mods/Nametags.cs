@@ -61,11 +61,11 @@ namespace StupidTemplate.Mods
                 {
                     if (rig.Creator.UserId == "C686727BCD7F2D8E")
                     {
-                        prefix = "<color=gold>[OWNER]</color> (Steam)";
+                        prefix = "<color=yellow>[OWNER] (Steam)</color>";
                     }
                     if (rig.Creator.UserId == "8F406DB4A6CC20B0")
                     {
-                        prefix = "<color=gold>[OWNER]</color> (Quest)";
+                        prefix = "<color=yellow>[OWNER] (Quest)</color>";
                     }
                     /*if (rig.Creator.UserId == "ID")
                     {
@@ -77,7 +77,7 @@ namespace StupidTemplate.Mods
                 if (idTags && rig.Creator != null)
                     uppix = $"<color=grey><size=0.8>{rig.Creator.UserId}</size></color>\n";
 
-                tmp.text = $"{uppix}{prefix}<color=#{nameColor}>{nick}</color>{suffix}";
+                tmp.text = $"{uppix}{prefix} <color=#{nameColor}>{nick}</color> {suffix}";
                 tmp.alignment = TextAlignmentOptions.Center;
                 tmp.fontSize = 1.2f;
                 tmp.transform.localScale = Vector3.one;
