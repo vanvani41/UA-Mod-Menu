@@ -86,10 +86,10 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Speedboost", enableMethod =() => Movement.Speedboost(), disableMethod =() => Movement.SpeedboostDisable(), toolTip = "Makes you faster."},
                 new ButtonInfo { buttonText = "Car Monke <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.CarMonkeG(), toolTip = "Ride forward when holding right grip and back when holding left grip."},
                 new ButtonInfo { buttonText = "Car Monke <color=gray>[</color><color=green> T </color><color=gray>]</color>", method =() => Movement.CarMonkeT(), toolTip = "Ride forward when holding right trigger and back when holding left trigger."},
-                new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XH </color><color=gray>]</color>", method =() => Movement.GhostMonkeH(), toolTip = "Freezes you when holding X."},
-                new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XT </color><color=gray>]</color>", method =() => Movement.GhostMonkeT(), toolTip = "Freezes you when pressing X."},
-                new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AH </color><color=gray>]</color>", method =() => Movement.InvisMonkeH(), toolTip = "Making you invisible when holding A."},
-                new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AT </color><color=gray>]</color>", method =() => Movement.InvisMonkeT(), toolTip = "Making you invisible when pressing A."},
+                new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XH </color><color=gray>]</color>", method =() => Movement.GhostMonkeXH(), toolTip = "Freezes you when holding X."},
+                new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XT </color><color=gray>]</color>", method =() => Movement.GhostMonkeXT(), toolTip = "Freezes you when pressing X."},
+                new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AH </color><color=gray>]</color>", method =() => Movement.InvisMonkeAH(), toolTip = "Making you invisible when holding A."},
+                new ButtonInfo { buttonText = "Invis Monke <color=gray>[</color><color=green> AT </color><color=gray>]</color>", method =() => Movement.InvisMonkeAT(), toolTip = "Making you invisible when pressing A."},
             },
 
             new ButtonInfo[] { // Safety Mods [7]

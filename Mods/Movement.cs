@@ -193,7 +193,7 @@ namespace StupidTemplate.Mods
         public static bool invOn = false;
         public static bool invPressed = false;
 
-        public static void GhostMonkeT()
+        public static void GhostMonkeXT()
         {
             bool isDown = ControllerInputPoller.instance.leftControllerPrimaryButton;
             if (isDown && !ghostPressed) ghostOn = !ghostOn;
@@ -202,13 +202,25 @@ namespace StupidTemplate.Mods
             UpdateRigState();
         }
 
-        public static void InvisMonkeH()
+        public static void GhostMonkeXH()
+        {
+            if (ControllerInputPoller.instance.leftControllerPrimaryButton)
+            {
+                GorillaTagger.Instance.offlineVRRig.enabled = false;
+            }
+            else
+            {
+                GorillaTagger.Instance.offlineVRRig.enabled = true;
+            }
+        }
+
+        public static void InvisMonkeAH()
         {
             bool invHold = ControllerInputPoller.instance.rightControllerPrimaryButton;
             UpdateRigState(invHold);
         }
 
-        public static void InvisMonkeT()
+        public static void InvisMonkeAT()
         {
             bool isDown = ControllerInputPoller.instance.rightControllerPrimaryButton;
             if (isDown && !invPressed) invOn = !invOn;
@@ -229,18 +241,6 @@ namespace StupidTemplate.Mods
                 rig.transform.position = Vector3.up * 9999f;
             else if (!ghostOn)
                 rig.transform.position = GorillaTagger.Instance.headCollider.transform.position;
-        }
-
-        public static void GhostMonkeH()
-        {
-            if(ControllerInputPoller.instance.leftControllerPrimaryButton)
-            {
-                GorillaTagger.Instance.offlineVRRig.enabled = false;
-            }
-            else
-            {
-                GorillaTagger.Instance.offlineVRRig.enabled = true;
-            }
         }
       
         public static void WASDFly()
