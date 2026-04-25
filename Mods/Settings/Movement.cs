@@ -1,4 +1,4 @@
-﻿using static StupidTemplate.Menu.Main;
+using static StupidTemplate.Menu.Main;
 
 namespace StupidTemplate.Mods.Settings
 {
@@ -19,7 +19,7 @@ namespace StupidTemplate.Mods.Settings
         }
 
         public static int SpeedboostIndex = 3;
-        public static float Speedboost = 9f;
+        public static float Speedboost = 7f;
 
         public static void ChangeSpeedboostSpeed()
         {
@@ -28,6 +28,7 @@ namespace StupidTemplate.Mods.Settings
 
             SpeedboostIndex++;
             SpeedboostIndex %= speedNames.Length;
+            Speedboost = speedValues[SpeedboostIndex];
 
             GetIndex("Change Speedboost Speed").overlapText = $"Change Speedboost Speed <color=gray>[</color><color=green>{speedNames[SpeedboostIndex]}</color><color=gray>]</color>";
         }

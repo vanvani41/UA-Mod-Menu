@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.XR;
 using static StupidTemplate.Menu.Main;
@@ -21,6 +22,13 @@ namespace StupidTemplate.Mods
 
         public static bool previousKickTrigger;
 
+        private static void KickPlayer(Player player)
+        {
+            if (!PhotonNetwork.IsMasterClient) return;
+            try { PhotonNetwork.DestroyPlayerObjects(player); } catch { }
+            try { PhotonNetwork.CloseConnection(player); } catch { }
+        }
+
         public static void KickGun()
         {
             if (ControllerInputPoller.instance.rightGrab)
@@ -35,21 +43,13 @@ namespace StupidTemplate.Mods
                         VRRig rig = hit.collider.GetComponentInParent<VRRig>();
                         if (rig != null && !rig.isLocal && rig.Creator != null)
                         {
-                            if (PhotonNetwork.IsMasterClient)
+                            foreach (var player in PhotonNetwork.PlayerList)
                             {
-                                foreach (var player in PhotonNetwork.PlayerList)
+                                if (player.UserId == rig.Creator.UserId)
                                 {
-                                    if (player.UserId == rig.Creator.UserId)
-                                    {
-                                        PhotonNetwork.CloseConnection(player);
-                                        Notifications.NotifiLib.SendNotification("<color=green>Kicked: </color>" + rig.Creator.NickName);
-                                        break;
-                                    }
+                                    KickPlayer(player);
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                Notifications.NotifiLib.SendNotification("<color=red>Not master client!</color>");
                             }
                         }
                     }

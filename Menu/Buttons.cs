@@ -1,4 +1,4 @@
-﻿using StupidTemplate.Classes;
+using StupidTemplate.Classes;
 using StupidTemplate.Mods;
 using static StupidTemplate.Menu.Main;
 using static StupidTemplate.Settings;
@@ -17,7 +17,9 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Safety Mods", method =() => currentCategory = 7, isTogglable = false, toolTip = "Opens the safety mods tab."},
                 new ButtonInfo { buttonText = "Fun/Challenge Mods", method =() => currentCategory = 8, isTogglable = false, toolTip = "Opens the Fun/Challenge mods tab."},
                 new ButtonInfo { buttonText = "Nametags Mods", method =() => currentCategory = 9, isTogglable = false, toolTip = "Opens the Nametags mods tab."},
-                new ButtonInfo { buttonText = "Master Mods", method =() => currentCategory = 10, isTogglable = false, toolTip = "Opens the Master mods tab."},
+                //new ButtonInfo { buttonText = "Overpowered Mods", method =() => currentCategory = 10, isTogglable = false, toolTip = "Opens the Overpowered mods tab."},
+                new ButtonInfo { buttonText = "Guns", method =() => currentCategory = 10, isTogglable = false, toolTip = "Opens the Guns tab."},
+                new ButtonInfo { buttonText = "Master Mods", method =() => currentCategory = 11, isTogglable = false, toolTip = "Opens the Master mods tab."},
             },
 
             new ButtonInfo[] { // Settings [1]
@@ -81,8 +83,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "WASD Fly <color=gray>[</color><color=green> WASD </color><color=gray>]</color>", method =() => Movement.WASDFly(), toolTip = "Fly on WASD!!"},
                 new ButtonInfo { buttonText = "Noclip <color=gray>[</color><color=green> RT </color><color=gray>]</color>", method =() => Movement.NoclipRT(), toolTip = "Noclips you when holding right trigger."},
                 new ButtonInfo { buttonText = "Noclip <color=gray>[</color><color=green> LT </color><color=gray>]</color>", method =() => Movement.NoclipLT(), toolTip = "Noclips you when holding right trigger."},
-                new ButtonInfo { buttonText = "Speedboost", method =() => Movement.Speedboost(), toolTip = "Makes you faster."},
-                new ButtonInfo { buttonText = "Teleport Gun <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.TeleportGun(), toolTip = "Teleports you to wherever your pointer is when pressing trigger."},
+                new ButtonInfo { buttonText = "Speedboost", enableMethod =() => Movement.Speedboost(), disableMethod =() => Movement.SpeedboostDisable(), toolTip = "Makes you faster."},
                 new ButtonInfo { buttonText = "Car Monke <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.CarMonkeG(), toolTip = "Ride forward when holding right grip and back when holding left grip."},
                 new ButtonInfo { buttonText = "Car Monke <color=gray>[</color><color=green> T </color><color=gray>]</color>", method =() => Movement.CarMonkeT(), toolTip = "Ride forward when holding right trigger and back when holding left trigger."},
                 new ButtonInfo { buttonText = "Ghost Monke <color=gray>[</color><color=green> XH </color><color=gray>]</color>", method =() => Movement.GhostMonkeH(), toolTip = "Freezes you when holding X."},
@@ -114,15 +115,28 @@ namespace StupidTemplate.Menu
             new ButtonInfo[] { // Nametags Mods [9]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
-                new ButtonInfo { buttonText = "Name Nametags", method =() => Nametags.nameTags = !Nametags.nameTags, enabled = true, toolTip = "Turns on Name Nametag."},
-                new ButtonInfo { buttonText = "ID Nametags", method =() => Nametags.idTags = !Nametags.idTags, toolTip = "Turns on ID Nametag."},
+                new ButtonInfo { buttonText = "Name Nametags", enableMethod =() => Nametags.EnableNameTags(), disableMethod =() => Nametags.DisableNameTags(), enabled = true, toolTip = "Turns on Name Nametag."},
+                new ButtonInfo { buttonText = "ID Nametags", enableMethod =() => Nametags.EnableIdTags(), disableMethod =() => Nametags.DisableIdTags(), toolTip = "Turns on ID Nametag."},
             },
 
-            new ButtonInfo[] { // Nametags Mods [10]
+            /*new ButtonInfo[] { // Overpowered Mods [10]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
-                new ButtonInfo { buttonText = "Are you a master client?", isTogglable = false, toolTip = "for master client"},
-                new ButtonInfo { buttonText = "Kick Gun", method =() => Master.KickGun(), toolTip = "Kicks whoever you want to, by a gun."},
+
+            },*/
+
+            new ButtonInfo[] { // Guns [10]
+                new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
+
+                new ButtonInfo { buttonText = "Teleport Gun", method =() => Guns.TeleportGun(), toolTip = "Teleports you to wherever your pointer is when pressing trigger."},
+                new ButtonInfo { buttonText = "Tag Gun", method =() => Guns.TagGun(), toolTip = "Teleports you to a player for 0.5s to tag him,  then returns you back."},
+            },
+
+            new ButtonInfo[] { // Master Mods [11]
+                new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
+
+                new ButtonInfo { buttonText = "Are you a master client?", method =() => Master.CheckIsMaster(), isTogglable = false, toolTip = "Checks if you are the master client."},
+                new ButtonInfo { buttonText = "Kick Gun", method =() => Master.KickGun(), toolTip = "Kicks whoever your pointer is on."},
             },
         };
     }

@@ -714,10 +714,27 @@ namespace StupidTemplate.Menu
 
         public static (RaycastHit Ray, GameObject NewPointer) RenderGun(int? overrideLayerMask = null)
         {
-            Transform GunTransform = GorillaTagger.Instance.rightHandTransform;
+            bool usingMouse = !ControllerInputPoller.instance.rightGrab &&
+                              Mouse.current != null &&
+                              Mouse.current.rightButton.isPressed;
 
-            Vector3 StartPosition = GunTransform.position;
-            Vector3 Direction = GunTransform.forward;
+            Vector3 StartPosition;
+            Vector3 Direction;
+
+            if (usingMouse && TPC != null)
+            {
+                // Mouse mode: ray from camera through mouse cursor position
+                Ray mouseRay = TPC.ScreenPointToRay(Mouse.current.position.ReadValue());
+                StartPosition = mouseRay.origin;
+                Direction = mouseRay.direction;
+            }
+            else
+            {
+                // VR mode: ray from right hand
+                Transform GunTransform = GorillaTagger.Instance.rightHandTransform;
+                StartPosition = GunTransform.position;
+                Direction = GunTransform.forward;
+            }
 
             Physics.Raycast(StartPosition + Direction / 4f, Direction, out var Ray, 512f, overrideLayerMask ?? NoInvisLayerMask());
             Vector3 EndPosition = gunLocked ? lockTarget.transform.position : Ray.point;
@@ -732,9 +749,12 @@ namespace StupidTemplate.Menu
             GunPointer.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             GunPointer.transform.position = EndPosition;
 
+            bool triggerActive = ControllerInputPoller.TriggerFloat(XRNode.RightHand) > 0.5f ||
+                                 (Mouse.current != null && Mouse.current.leftButton.isPressed);
+
             Renderer PointerRenderer = GunPointer.GetComponent<Renderer>();
             PointerRenderer.material.shader = Shader.Find("GUI/Text Shader");
-            PointerRenderer.material.color = gunLocked || ControllerInputPoller.TriggerFloat(XRNode.RightHand) > 0.5f ? buttonColors[1].GetCurrentColor() : buttonColors[0].GetCurrentColor();
+            PointerRenderer.material.color = gunLocked || triggerActive ? buttonColors[1].GetCurrentColor() : buttonColors[0].GetCurrentColor();
 
             Destroy(GunPointer.GetComponent<Collider>());
 

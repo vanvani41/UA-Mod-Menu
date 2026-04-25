@@ -1,11 +1,7 @@
-﻿using BepInEx;
+using BepInEx;
 using GorillaLocomotion;
-using Oculus.Interaction.Input;
-using Photon.Pun;
 using StupidTemplate.Classes;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 using static StupidTemplate.Menu.Main;
 
 namespace StupidTemplate.Mods
@@ -180,38 +176,16 @@ namespace StupidTemplate.Mods
             }
         }
 
-
-
-        public static bool previousTeleportTrigger;
-        public static void TeleportGun()
-        {
-            if (ControllerInputPoller.instance.rightGrab)
-            {
-                var GunData = RenderGun();
-                GameObject NewPointer = GunData.NewPointer;
-
-                if (ControllerInputPoller.TriggerFloat(XRNode.RightHand) > 0.5f && !previousTeleportTrigger)
-                {
-                    GTPlayer.Instance.TeleportTo(NewPointer.transform.position + Vector3.up, GTPlayer.Instance.transform.rotation);
-                    GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
-                }
-
-                previousTeleportTrigger = ControllerInputPoller.TriggerFloat(XRNode.RightHand) > 0.5f;
-            }
-        }
         public static void Speedboost()
         {
-            bool speedboost = true;
-            if (speedboost == true)
-            {
-                GTPlayer.Instance.maxJumpSpeed = Settings.Movement.Speedboost;
-                GTPlayer.Instance.jumpMultiplier = Settings.Movement.Speedboost;
-            }
-            else
-            {
-                    GTPlayer.Instance.maxJumpSpeed = 6.5f;
-                    GTPlayer.Instance.jumpMultiplier = 1.1f;
-            }
+            GTPlayer.Instance.maxJumpSpeed = Settings.Movement.Speedboost;
+            GTPlayer.Instance.jumpMultiplier = Settings.Movement.Speedboost;
+        }
+
+        public static void SpeedboostDisable()
+        {
+            GTPlayer.Instance.maxJumpSpeed = 6.5f;
+            GTPlayer.Instance.jumpMultiplier = 1.1f;
         }
         public static bool ghostOn = false;
         public static bool ghostPressed = false;

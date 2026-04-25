@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using TMPro;
 
@@ -8,6 +9,85 @@ namespace StupidTemplate.Mods
     {
         public static bool nameTags = true;
         public static bool idTags = false;
+
+        // Store original values so we can restore them when disabling
+        private static readonly Dictionary<TMP_Text, OriginalNametagData> originalData = new Dictionary<TMP_Text, OriginalNametagData>();
+
+        private struct OriginalNametagData
+        {
+            public string text;
+            public float fontSize;
+            public Vector3 localPosition;
+            public Vector3 localScale;
+            public TextAlignmentOptions alignment;
+        }
+
+        private static void SaveOriginal(TMP_Text tmp)
+        {
+            if (!originalData.ContainsKey(tmp))
+            {
+                originalData[tmp] = new OriginalNametagData
+                {
+                    text = tmp.text,
+                    fontSize = tmp.fontSize,
+                    localPosition = tmp.transform.localPosition,
+                    localScale = tmp.transform.localScale,
+                    alignment = tmp.alignment
+                };
+            }
+        }
+
+        private static void RestoreOriginal(TMP_Text tmp)
+        {
+            if (originalData.TryGetValue(tmp, out var data))
+            {
+                tmp.fontSize = data.fontSize;
+                tmp.transform.localPosition = data.localPosition;
+                tmp.transform.localScale = data.localScale;
+                tmp.alignment = data.alignment;
+                originalData.Remove(tmp);
+            }
+        }
+
+        public static void EnableNameTags()
+        {
+            nameTags = true;
+        }
+
+        public static void DisableNameTags()
+        {
+            nameTags = false;
+            // If both are off, restore all nametags
+            if (!nameTags && !idTags)
+                RestoreAllNametags();
+        }
+
+        public static void EnableIdTags()
+        {
+            idTags = true;
+        }
+
+        public static void DisableIdTags()
+        {
+            idTags = false;
+            // If both are off, restore all nametags
+            if (!nameTags && !idTags)
+                RestoreAllNametags();
+        }
+
+        private static void RestoreAllNametags()
+        {
+            if (GorillaParent.instance == null) return;
+            if (VRRigCache.ActiveRigs == null) return;
+
+            foreach (VRRig rig in VRRigCache.ActiveRigs)
+            {
+                if (rig == null || rig.isOfflineVRRig) continue;
+                if (rig.playerText1 == null) continue;
+
+                RestoreOriginal(rig.playerText1);
+            }
+        }
 
         public static void RunNametags()
         {
@@ -31,12 +111,8 @@ namespace StupidTemplate.Mods
                 TMP_Text tmp = rig.playerText1;
                 if (tmp == null) return;
 
-                if (!nameTags && !idTags)
-                {
-                    tmp.text = "";
-                    tmp.transform.localPosition = new Vector3(0f, 0f, 0f); // постав свої координати
-                    return;
-                }
+                // Save original data before modifying
+                SaveOriginal(tmp);
 
                 string nameColor =
                     rig.mainSkin != null &&
@@ -73,11 +149,20 @@ namespace StupidTemplate.Mods
                     }*/
                 }
 
-
                 if (idTags && rig.Creator != null)
-                    uppix = $"<color=grey><size=0.8>{rig.Creator.UserId}</size></color>\n";
+                    uppix = $"<color=white><size=0.8>{rig.Creator.UserId}</size></color>\n";
 
-                tmp.text = $"{uppix}{prefix} <color=#{nameColor}>{nick}</color> {suffix}";
+                // Build text based on what's enabled
+                if (nameTags)
+                {
+                    tmp.text = $"{uppix}{prefix} <color=#{nameColor}>{nick}</color> {suffix}";
+                }
+                else if (idTags)
+                {
+                    // Only ID tags, no name
+                    tmp.text = $"<color=white><size=0.8>{rig.Creator?.UserId ?? "?"}</size></color>";
+                }
+
                 tmp.alignment = TextAlignmentOptions.Center;
                 tmp.fontSize = 1.2f;
                 tmp.transform.localScale = Vector3.one;
