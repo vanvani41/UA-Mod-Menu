@@ -45,9 +45,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Change Fly Speed", overlapText = "Change Fly Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeFlySpeed(), isTogglable = false, toolTip = "Changes the speed of the fly mod."},
                 new ButtonInfo { buttonText = "Change Speedboost Speed", overlapText = "Change Speedboost Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeSpeedboostSpeed(), isTogglable = false, toolTip = "Changes the speed of the speedboost mod."},
                 new ButtonInfo { buttonText = "Change WASD Fly Speed", overlapText = "Change WASD Fly Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeWASDSpeed(), isTogglable = false, toolTip = "Changes the speed of the WASD fly mod."},
-                new ButtonInfo { buttonText = "Change Car Monke Speed", overlapText = "Change Car Monke Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeCarMonkeSpeed(), isTogglable = false, toolTip = "Changes the speed of the car monke mod."},
-                new ButtonInfo { buttonText = "Change Pull Speed", overlapText = "Change Pull Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangePullSpeed(), isTogglable = false, toolTip = "Changes the speed of the pull mod."},
-            },
+                new ButtonInfo { buttonText = "Change Car Monke Speed", overlapText = "Change Car Monke Speed <color=gray>[</color><color=green>Normal</color><color=gray>]</color>", method =() => Mods.Settings.Movement.ChangeCarMonkeSpeed(), isTogglable = false, toolTip = "Changes the speed of the car monke mod."},            },
 
             new ButtonInfo[] { // Nametags Settings [4]
                 new ButtonInfo { buttonText = "Return to Settings", method =() => currentCategory = 1, isTogglable = false, toolTip = "Returns to the main settings page for the menu."},

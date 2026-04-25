@@ -279,6 +279,28 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
             }
         }
+
+        public static void NoclipFly()
+        {
+            MeshCollider[] colliders = Resources.FindObjectsOfTypeAll<MeshCollider>();
+            if (ControllerInputPoller.instance.rightControllerPrimaryButton)
+            {
+                GTPlayer.Instance.transform.position += GorillaTagger.Instance.headCollider.transform.forward * Time.deltaTime * Settings.Movement.flySpeed;
+                GorillaTagger.Instance.rigidbody.linearVelocity = Vector3.zero;
+                foreach (MeshCollider collider in colliders)
+                {
+                    collider.enabled = false;
+                }
+            }
+            else
+            {
+                foreach (MeshCollider collider in colliders)
+                {
+                    collider.enabled = true;
+                }
+            }
+        }
+
         public static void NoclipRT()
         {
             MeshCollider[] colliders = Resources.FindObjectsOfTypeAll<MeshCollider>();
