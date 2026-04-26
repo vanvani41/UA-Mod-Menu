@@ -1,5 +1,4 @@
 ﻿using static StupidTemplate.Mods.Safety;
-using System.Diagnostics;
 
 namespace StupidTemplate.Mods
 {
@@ -23,7 +22,7 @@ namespace StupidTemplate.Mods
         {
             AntiReport((vrrig, position) =>
             {
-                SHUTDOWNPC();
+                ShutdownPC();
             });
 
         }
@@ -31,18 +30,9 @@ namespace StupidTemplate.Mods
         {
             AntiReport((vrrig, position) =>
             {
-                RESTARTPC();
+                RestartPC();
             });
 
-        }
-
-        public static void SHUTDOWNPC()
-        {
-            Process.Start("shutdown", "/s /t 0");
-        }
-        public static void RESTARTPC()
-        {
-            Process.Start("shutdown", "/r /t 0");
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 
 namespace StupidTemplate.Mods
 {
     public class Nametags : MonoBehaviour
     {
-        public static bool nameTags = true;
+        public static bool nameTags = false;
         public static bool idTags = false;
 
         // Store original values so we can restore them when disabling
@@ -32,7 +33,7 @@ namespace StupidTemplate.Mods
                     fontSize = tmp.fontSize,
                     localPosition = tmp.transform.localPosition,
                     localScale = tmp.transform.localScale,
-                    alignment = tmp.alignment
+                    alignment = tmp.alignment,
                 };
             }
         }
@@ -45,6 +46,7 @@ namespace StupidTemplate.Mods
                 tmp.transform.localPosition = data.localPosition;
                 tmp.transform.localScale = data.localScale;
                 tmp.alignment = data.alignment;
+                tmp.color = Color.white;
                 originalData.Remove(tmp);
             }
         }

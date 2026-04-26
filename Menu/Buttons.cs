@@ -77,7 +77,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Sticky Platforms <color=gray>[</color><color=green> G </color><color=gray>]</color>", method =() => Movement.GripStickyPlatforms(), toolTip = "Spawns platforms on your hands when pressing grip."},
                 new ButtonInfo { buttonText = "Sticky Platforms <color=gray>[</color><color=green> T </color><color=gray>]</color>", method =() => Movement.TriggerStickyPlatforms(), toolTip = "Spawns platforms on your hands when pressing trigger."},
                 new ButtonInfo { buttonText = "Fly <color=gray>[</color><color=green> A </color><color=gray>]</color>", method =() => Movement.Fly(), toolTip = "Sends you forward when holding A."},
-                new ButtonInfo { buttonText = "Noclip Fly <color=gray>[</color><color=green> A </color><color=gray>]</color>", method =() => Movement.Fly(), toolTip = "Sends you forward when holding A with Noclip."},
+                new ButtonInfo { buttonText = "Noclip Fly <color=gray>[</color><color=green> A </color><color=gray>]</color>", method =() => Movement.NoclipFly(), toolTip = "Sends you forward when holding A with Noclip."},
                 new ButtonInfo { buttonText = "WASD Fly <color=gray>[</color><color=green> WASD </color><color=gray>]</color>", method =() => Movement.WASDFly(), toolTip = "Fly on WASD!!"},
                 new ButtonInfo { buttonText = "Noclip <color=gray>[</color><color=green> RT </color><color=gray>]</color>", method =() => Movement.NoclipRT(), toolTip = "Noclips you when holding right trigger."},
                 new ButtonInfo { buttonText = "Noclip <color=gray>[</color><color=green> LT </color><color=gray>]</color>", method =() => Movement.NoclipLT(), toolTip = "Noclips you when holding right trigger."},
@@ -94,26 +94,24 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
                 new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=green> Disconnect </color><color=gray>]</color>", method =() => Safety.AntiReportDisconnect(), toolTip = "Disconnects you when someone tries to report you."},
+                new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=green> Reconnect </color><color=gray>]</color>", method =() => Safety.AntiReportReconnect(), toolTip = "Reconnects you when someone tries to report you."},
                 new ButtonInfo { buttonText = "No Finger Touch", method =() => Safety.NoFingerTouch(), toolTip = "Disables finger touches."},
                 new ButtonInfo { buttonText = "Close Gorilla Tag", method =() => Safety.CloseGorillaTag(), isTogglable = false},
                 new ButtonInfo { buttonText = "Restart Gorilla Tag", method =() => Safety.RestartGorillaTag(), isTogglable = false},
+                new ButtonInfo { buttonText = "SHUTDOWN PC", method =() => Safety.ShutdownPC(), isTogglable = false},
+                new ButtonInfo { buttonText = "RESTART PC", method =() => Safety.RestartPC(), isTogglable = false},
             },
 
             new ButtonInfo[] { // Fun/Challenge Mods [8]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
                 
                 new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=orange> Close Gorilla Tag </color><color=gray>]</color>", method =() => FunChallenge.AntiReportCloseGorillaTag(), toolTip = "Closes Gorilla Tag when someone tries to report you."},
-                new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=orange> Restart Gorilla Tag </color><color=gray>]</color>", method =() => FunChallenge.AntiReportRestartGorillaTag(), toolTip = "Restarts Gorilla Tag when someone tries to report you."},
-                new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=red> SHUTDOWN PC </color><color=gray>]</color>", method =() => FunChallenge.AntiReportSHUTDOWNPC(), toolTip = "Shutdowns PC when someone tries to report you."},
-                new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=red> RESTART PC </color><color=gray>]</color>", method =() => FunChallenge.AntiReportRESTARTPC(), toolTip = "Restarts PC when someone tries to report you."},
-                new ButtonInfo { buttonText = "<color=red>SHUTDOWN PC</color>", method =() => FunChallenge.SHUTDOWNPC(), isTogglable = false},
-                new ButtonInfo { buttonText = "<color=red>RESTART PC</color>", method =() => FunChallenge.RESTARTPC(), isTogglable = false},
-            },
+                new ButtonInfo { buttonText = "Anti Report <color=gray>[</color><color=orange> Restart Gorilla Tag </color><color=gray>]</color>", method =() => FunChallenge.AntiReportRestartGorillaTag(), toolTip = "Restarts Gorilla Tag when someone tries to report you."},            },
 
             new ButtonInfo[] { // Nametags Mods [9]
                 new ButtonInfo { buttonText = "Return to Main", method =() => currentCategory = 0, isTogglable = false, toolTip = "Returns to the main page of the menu."},
 
-                new ButtonInfo { buttonText = "Name Nametags", enableMethod =() => Nametags.EnableNameTags(), disableMethod =() => Nametags.DisableNameTags(), enabled = true, toolTip = "Turns on Name Nametag."},
+                new ButtonInfo { buttonText = "Name Nametags", enableMethod =() => Nametags.EnableNameTags(), disableMethod =() => Nametags.DisableNameTags(), enabled = false, toolTip = "Turns on Name Nametag."},
                 new ButtonInfo { buttonText = "ID Nametags", enableMethod =() => Nametags.EnableIdTags(), disableMethod =() => Nametags.DisableIdTags(), toolTip = "Turns on ID Nametag."},
             },
 

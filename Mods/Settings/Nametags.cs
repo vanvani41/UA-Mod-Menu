@@ -14,6 +14,7 @@ namespace StupidTemplate.Mods.Settings
 
             nametagsindex++;
             nametagsindex %= nametagsNames.Length;
+            nametagssize = nametagsValues[nametagsindex];
 
             GetIndex("Change Name Nametags Size").overlapText = $"Change Name Nametags Size <color=gray>[</color><color=green>{nametagsNames[nametagsindex]}</color><color=gray>]</color>";
         }

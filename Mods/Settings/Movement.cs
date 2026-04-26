@@ -14,6 +14,7 @@ namespace StupidTemplate.Mods.Settings
 
             flySpeedIndex++;
             flySpeedIndex %= flyNames.Length;
+            flySpeed = flyValues[flySpeedIndex];
 
             GetIndex("Change Fly Speed").overlapText = $"Change Fly Speed <color=gray>[</color><color=green>{flyNames[flySpeedIndex]}</color><color=gray>]</color>";
         }
@@ -43,6 +44,7 @@ namespace StupidTemplate.Mods.Settings
 
             WASDSpeedIndex++;
             WASDSpeedIndex %= WASDNames.Length;
+            WASDSpeed = WASDValues[WASDSpeedIndex];
 
             GetIndex("Change WASD Fly Speed").overlapText = $"Change WASD Fly Speed <color=gray>[</color><color=green>{WASDNames[WASDSpeedIndex]}</color><color=gray>]</color>";
         }
@@ -57,22 +59,9 @@ namespace StupidTemplate.Mods.Settings
 
             CarMonkeSpeedIndex++;
             CarMonkeSpeedIndex %= CarNames.Length;
+            CarMonkeSpeed = CarValues[CarMonkeSpeedIndex];
 
             GetIndex("Change Car Monke Speed").overlapText = $"Change Car Monke Speed <color=gray>[</color><color=green>{CarNames[CarMonkeSpeedIndex]}</color><color=gray>]</color>";
-        }
-
-        public static int PullIndex = 3;
-        public static float PullSpeed = 15f;
-
-        public static void ChangePullSpeed()
-        {
-            string[] PullNames = new string[] { "Extra Slow", "Very Slow", "Slow", "Normal", "Fast", "Very Fast", "Extra Fast" };
-            float[] PullValues = new float[] { 3f, 5f, 10f, 15f, 20f, 30f, 50f };
-
-            PullIndex++;
-            PullIndex %= PullNames.Length;
-
-            GetIndex("Change Pull Speed").overlapText = $"Change Pull Speed <color=gray>[</color><color=green>{PullNames[PullIndex]}</color><color=gray>]</color>";
         }
     }
 }
